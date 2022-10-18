@@ -60,15 +60,20 @@ const handleCancel = () => (visible.value = false);
   </a-tooltip>
 
   <a-modal
+    :width="320"
     v-model:visible="visible"
     :title="i18n['settings'].value"
     :ok-text="i18n['confirm'].value"
     :cancel-text="i18n['cancel'].value"
-    @cancel="handleCancel"
     @before-ok="handleBeforeOk"
+    @cancel="handleCancel"
   >
-    <a-form :model="form" ref="formRef">
-      <a-form-item field="number" :label="i18n['reviewNumber'].value" label-col-flex="100px">
+    <a-form :model="form" ref="formRef" label-align="left">
+      <a-form-item
+        field="number"
+        :label="i18n['reviewNumber'].value"
+        label-col-flex="100px"
+      >
         <a-input-number v-model="form.number" :min="1" :max="100" />
       </a-form-item>
     </a-form>

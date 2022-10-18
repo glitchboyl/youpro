@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref } from "vue";
 import { IconPlus } from "@arco-design/web-vue/es/icon";
 import useWords from "@/utils/useWords";
 import useReviewNumber from "@/utils/useReviewNumber";
@@ -35,11 +35,7 @@ const handleBeforeOk = (done) => {
   });
 };
 const handleCancel = () => (visible.value = false);
-watch(visible, (value) => {
-  if (!value) {
-    formRef.value.resetFields();
-  }
-});
+const handleClose = () => formRef.value.resetFields();
 
 const englishRule = {
   validator: (value, cb) => {
@@ -85,12 +81,14 @@ const chineseRule = {
   </a-tooltip>
 
   <a-modal
+    :width="400"
     v-model:visible="visible"
     :title="i18n['increaseWord'].value"
     :ok-text="i18n['confirm'].value"
     :cancel-text="i18n['cancel'].value"
     @cancel="handleCancel"
     @before-ok="handleBeforeOk"
+    @close="handleClose"
   >
     <a-form :model="form" ref="formRef">
       <a-form-item field="english" label="English" :rules="englishRule">
