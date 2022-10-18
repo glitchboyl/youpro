@@ -12,17 +12,22 @@ const Operations = defineAsyncComponent(() =>
   <Suspense>
     <the-words />
     <template #fallback>
-      <a-skeleton animation>
+      <a-skeleton animation class="words-container-skeleton">
         <a-space direction="vertical" :style="{ width: '100%' }" size="large">
-          <a-skeleton-shape />
+          <a-skeleton-line :line-height="240" />
         </a-space>
       </a-skeleton>
     </template>
   </Suspense>
-  <!-- <a-skeleton animation>
-    <a-space direction="vertical" :style="{ width: '100%' }" size="large">
-      <a-skeleton-shape />
-    </a-space>
-  </a-skeleton> -->
   <operations />
 </template>
+
+<style>
+.words-container-skeleton {
+  top: var(--top-boundary);
+  width: var(--words-container-width);
+  left: 50%;
+  margin-left: calc(0px - var(--words-container-width) / 2);
+  position: relative;
+}
+</style>

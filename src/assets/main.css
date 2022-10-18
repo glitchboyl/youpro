@@ -1,5 +1,5 @@
 @import './base.css';
 
 body {
-	background-color: var(--color-bg-3);
+	background-color: rgb(var(--arcoblue-1));
 }
