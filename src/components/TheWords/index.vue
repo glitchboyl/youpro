@@ -6,21 +6,19 @@ const WordItem = defineAsyncComponent(() => import("./WordItem.vue"));
 
 const { cache } = useWords();
 const translater = useTranlater();
-const CToE = computed(() => cache.value[0] || []);
-const EToC = computed(() => cache.value[1] || []);
+const CToE = computed(() => cache.value[0].length || 0);
+const EToC = computed(() => cache.value[1].length || 0);
 </script>
 
 <template>
-  <div class="words-container">
-    <template v-if="translater">
-      <template v-for="(,index) of EToC" :key="`EToC-${index}`">
-        <word-item :index="index" />
-      </template>
+  <div class="words-container" v-show="translater">
+    <template v-for="(,index) of EToC" :key="`EToC-${index}`">
+      <word-item :type="1" :index="index" />
     </template>
-    <template v-else>
-      <template v-for="(,index) of CToE" :key="`CToE-${index}`">
-        <word-item :index="index" />
-      </template>
+  </div>
+  <div class="words-container" v-show="!translater">
+    <template v-for="(,index) of CToE" :key="`CToE-${index}`">
+      <word-item :type="0" :index="index" />
     </template>
   </div>
 </template>

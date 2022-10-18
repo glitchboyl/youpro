@@ -8,16 +8,14 @@ import {
 } from "@arco-design/web-vue/es/icon";
 import { useThrottleFn } from "vueposu";
 import useWords from "@/utils/useWords";
-import useTranslater from "@/utils/useTranslater";
 import useInternationalization from "@/utils/useInternationalization";
 
-const translater = useTranslater();
 const { store, cache } = useWords();
 
-const props = defineProps(["index"]);
-const { index } = props;
+const props = defineProps(['type', "index"]);
+const { type, index } = props;
 
-const word = computed(() => cache.value[translater.value][index]);
+const word = computed(() => cache.value[type][index]);
 const english = word.value[0];
 const chinese = store.value[word.value[0]];
 const status = ref(word.value[1]);
@@ -36,7 +34,7 @@ const speak = useThrottleFn(() => {
 }, 500);
 
 function translate(text) {
-  status.value = cache.value[translater.value][index][1] = translater.value
+  status.value = cache.value[type][index][1] = type
     ? text.split("；").every((ch) => chinese.includes(ch))
       ? STATUS.TRUE
       : STATUS.FALSE
@@ -61,12 +59,12 @@ function translate(text) {
     </span>
     <div class="content">
       {{}}
-      <a-typography-title :heading="6" @click="translater && speak()">
-        {{ translater ? english : chinese.join("；") }}
+      <a-typography-title :heading="6" @click="type && speak()">
+        {{ type ? english : chinese.join("；") }}
       </a-typography-title>
       <template v-if="status === STATUS.TRUE">
-        <span class="translation" @click="!translater && speak()">
-          {{ translater ? chinese.join("；") : english }}
+        <span class="translation" @click="!type && speak()">
+          {{ type ? chinese.join("；") : english }}
         </span>
       </template>
       <template v-else>
