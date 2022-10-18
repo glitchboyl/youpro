@@ -18,12 +18,16 @@ export function getShuffled(n) {
   const currentWords = cache.value[translater.value].map(([word]) => word);
   return Object.keys(store.value)
     .filter((word) => !currentWords.includes(word))
-    .sort(() => Math.random() * 0.5)
+    .sort(() => (Math.random() > 0.5 ? -1 : 1))
     .slice(0, n)
     .map((word) => [word, STATUS.DEFAULT]);
 }
 
-if (new Date(lastUpdate.value).toDateString() !== now.toDateString()) {
+if (
+  new Date(lastUpdate.value).toDateString() !== now.toDateString() ||
+  !cache.value[0].length ||
+  !cache.value[1].length
+) {
   lastUpdate.value = now.getTime();
   cache.value = [
     getShuffled(reviewNumber.value),

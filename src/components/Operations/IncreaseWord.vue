@@ -86,6 +86,7 @@ const chineseRule = {
     :title="i18n['increaseWord'].value"
     :ok-text="i18n['confirm'].value"
     :cancel-text="i18n['cancel'].value"
+    :mask-closable="false"
     @cancel="handleCancel"
     @before-ok="handleBeforeOk"
     @close="handleClose"

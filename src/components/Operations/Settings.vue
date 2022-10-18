@@ -65,6 +65,7 @@ const handleCancel = () => (visible.value = false);
     :title="i18n['settings'].value"
     :ok-text="i18n['confirm'].value"
     :cancel-text="i18n['cancel'].value"
+    :mask-closable="false"
     @before-ok="handleBeforeOk"
     @cancel="handleCancel"
   >
