@@ -37,7 +37,8 @@ body {
   margin-top: 12px;
 }
 
-.operations .arco-btn {
+.operations .arco-btn,
+.word-item .arco-input-append .arco-btn {
   font-size: 16px !important;
 }
 

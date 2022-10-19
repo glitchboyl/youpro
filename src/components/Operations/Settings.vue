@@ -31,7 +31,6 @@ const numberRule = {
   },
 };
 
-const handleClick = () => (visible.value = true);
 const handleBeforeOk = (done) => {
   formRef.value.validate().then((errors) => {
     if (!errors) {
@@ -41,12 +40,11 @@ const handleBeforeOk = (done) => {
     done(!errors);
   });
 };
-const handleCancel = () => (visible.value = false);
 </script>
 
 <template>
   <a-tooltip :content="i18n['settings'].value" position="right" mini>
-    <a-button @click="handleClick" type="primary" shape="circle">
+    <a-button @click="visible = true" type="primary" shape="circle">
       <template #icon>
         <icon-settings />
       </template>
@@ -61,7 +59,7 @@ const handleCancel = () => (visible.value = false);
     :cancel-text="i18n['cancel'].value"
     :mask-closable="false"
     @before-ok="handleBeforeOk"
-    @cancel="handleCancel"
+    @cancel="visible = false"
   >
     <a-form :model="form" ref="formRef" label-align="left">
       <a-form-item

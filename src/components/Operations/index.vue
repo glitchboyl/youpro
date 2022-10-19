@@ -1,6 +1,5 @@
 <script setup>
-import { ref, defineAsyncComponent } from "vue";
-import { IconMenu, IconClose } from "@arco-design/web-vue/es/icon";
+import { defineAsyncComponent } from "vue";
 
 const Translater = defineAsyncComponent(() => import("./Translater.vue"));
 const IncreaseWord = defineAsyncComponent(() => import("./IncreaseWord.vue"));
@@ -10,8 +9,6 @@ const ExportWords = defineAsyncComponent(() => import("./ExportWords.vue"));
 const ImportWords = defineAsyncComponent(() => import("./ImportWords.vue"));
 const Progress = defineAsyncComponent(() => import("./Progress.vue"))
 const Github = defineAsyncComponent(() => import("./Github.vue"));
-
-const popupVisible2 = ref(true);
 </script>
 
 <template>

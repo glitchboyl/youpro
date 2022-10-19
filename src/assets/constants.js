@@ -3,6 +3,7 @@ export const STATUS = {
   DEFAULT: 0,
   TRUE: 1,
   FALSE: 2,
+  LOSER: 3
 };
 
 export const defaultWord = "abandon";
@@ -21,5 +22,6 @@ export const localeMap = {
   confirm: ["确定", "Confirm"],
   cancel: ["取消", "Cancel"],
   translatePlaceholder: ["翻译", "Translate it"],
+  cheat: ["我是废物，我要看答案", "I'm LOSER and view the answer"],
   github: ["在 GitHub 上查看源代码", "View it on GitHub"],
 };

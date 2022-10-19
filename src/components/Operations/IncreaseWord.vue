@@ -20,8 +20,6 @@ const formRef = ref();
 const { store, cache } = useWords();
 const { reviewNumber } = useReviewNumber();
 const translater = useTranslater();
-
-const handleClick = () => (visible.value = true);
 const handleBeforeOk = (done) => {
   formRef.value.validate().then((errors) => {
     if (!errors) {
@@ -67,11 +65,7 @@ const chineseRule = {
 
 <template>
   <a-tooltip :content="i18n['increaseWord'].value" position="right" mini>
-    <a-button
-      @click="visible = true"
-      type="primary"
-      shape="circle"
-    >
+    <a-button @click="visible = true" type="primary" shape="circle">
       <template #icon>
         <icon-plus />
       </template>
@@ -85,7 +79,7 @@ const chineseRule = {
     :ok-text="i18n['confirm'].value"
     :cancel-text="i18n['cancel'].value"
     :mask-closable="false"
-    @cancel="handleCancel"
+    @cancel="visible = false"
     @before-ok="handleBeforeOk"
     @close="handleClose"
   >

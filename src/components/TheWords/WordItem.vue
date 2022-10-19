@@ -4,7 +4,9 @@ import { STATUS } from "@/assets/constants";
 import {
   IconCheckCircleFill,
   IconCloseCircleFill,
+  IconThumbDownFill,
   IconQuestionCircleFill,
+  IconEye,
 } from "@arco-design/web-vue/es/icon";
 import { useThrottleFn } from "vueposu";
 import useWords from "@/utils/useWords";
@@ -22,7 +24,7 @@ const english = word.value[0];
 const chinese = store.value[word.value[0]];
 const status = ref(word.value[1]);
 
-const i18n = useInternationalization(["translatePlaceholder"]);
+const i18n = useInternationalization(["translatePlaceholder", "cheat"]);
 
 let speech = null;
 const synth = window.speechSynthesis;
@@ -58,27 +60,33 @@ watch(
     immediate: true,
   }
 );
+function cheat() {
+  status.value = cache.value[type][index][1] = STATUS.LOSER;
+}
 </script>
 
 <template>
   <div class="word-item">
     <span class="status">
-      <IconCheckCircleFill
+      <icon-check-circle-fill
         v-if="status === STATUS.TRUE"
         style="color: rgb(var(--green-4))"
       />
-      <IconCloseCircleFill
+      <icon-close-circle-fill
         v-else-if="status === STATUS.FALSE"
         style="color: rgb(var(--red-4))"
       />
-      <IconQuestionCircleFill v-else />
+      <icon-thumb-down-fill
+        v-else-if="status === STATUS.LOSER"
+        style="color: rgb(var(--orange-4))"
+      />
+      <icon-question-circle-fill v-else />
     </span>
     <div class="content">
-      {{}}
       <a-typography-title :heading="6" @click="type && speak()">
         {{ type ? english : chinese.join("；") }}
       </a-typography-title>
-      <template v-if="status === STATUS.TRUE">
+      <template v-if="status === STATUS.TRUE || status === STATUS.LOSER">
         <span class="translation" @click="!type && speak()">
           {{ type ? chinese.join("；") : english }}
         </span>
@@ -88,7 +96,17 @@ watch(
           :placeholder="i18n['translatePlaceholder'].value"
           @change="translate"
           :error="status === STATUS.FALSE"
-        />
+        >
+          <template #append>
+            <a-tooltip :content="i18n['cheat'].value" position="top" mini>
+              <a-button type="primary" status="warning" @click="cheat">
+                <template #icon>
+                  <icon-eye />
+                </template>
+              </a-button>
+            </a-tooltip>
+          </template>
+        </a-input>
       </template>
     </div>
   </div>
@@ -120,6 +138,10 @@ watch(
 }
 .word-item .translation {
   line-height: 32px;
+}
+.word-item .arco-input-append {
+  padding: 0;
+  border: 0;
 }
 .half-divider {
   --half-divider-left: 55px;
