@@ -13,5 +13,6 @@ import ButtonSkeleton from "./ButtonSkeleton.vue";
     <button-skeleton />
     <button-skeleton />
     <button-skeleton />
+    <button-skeleton />
   </div>
 </template>

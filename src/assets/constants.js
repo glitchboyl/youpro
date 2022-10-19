@@ -15,8 +15,9 @@ export const localeMap = {
   settings: ["设置", "Settings"],
   reviewNumber: ["复习数量", "Review number"],
   refresh: ["刷新", "Refresh"],
+  progress: ["当前进度：", "Current progress: "],
   confirm: ["确定", "Confirm"],
   cancel: ["取消", "Cancel"],
   translatePlaceholder: ["翻译", "Translate it"],
-  github: ["在 GitHub 上查看源代码", "View it on GitHub"]
+  github: ["在 GitHub 上查看源代码", "View it on GitHub"],
 };

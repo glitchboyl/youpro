@@ -18,7 +18,7 @@ const form = reactive({
 const formRef = ref();
 
 const { store, cache } = useWords();
-const reviewNumber = useReviewNumber();
+const { reviewNumber } = useReviewNumber();
 const translater = useTranslater();
 
 const handleClick = () => (visible.value = true);

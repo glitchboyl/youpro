@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { STATUS } from "@/assets/constants";
 import {
   IconCheckCircleFill,
@@ -8,12 +8,14 @@ import {
 } from "@arco-design/web-vue/es/icon";
 import { useThrottleFn } from "vueposu";
 import useWords from "@/utils/useWords";
+import useReviewNumber from "@/utils/useReviewNumber";
 import useInternationalization from "@/utils/useInternationalization";
 
-const { store, cache } = useWords();
-
-const props = defineProps(['type', "index"]);
+const props = defineProps(["type", "index"]);
 const { type, index } = props;
+
+const { store, cache } = useWords();
+const { reviewed } = useReviewNumber();
 
 const word = computed(() => cache.value[type][index]);
 const english = word.value[0];
@@ -35,13 +37,27 @@ const speak = useThrottleFn(() => {
 
 function translate(text) {
   status.value = cache.value[type][index][1] = type
-    ? text.split("；").every((ch) => chinese.includes(ch))
+    ? text
+        .split("；")
+        .filter((e) => e)
+        .every((ch) => chinese.includes(ch))
       ? STATUS.TRUE
       : STATUS.FALSE
     : text === english
     ? STATUS.TRUE
     : STATUS.FALSE;
 }
+watch(
+  status,
+  (n, o) => {
+    if (n === STATUS.TRUE || o === STATUS.TRUE) {
+      reviewed[type].value++;
+    }
+  },
+  {
+    immediate: true,
+  }
+);
 </script>
 
 <template>

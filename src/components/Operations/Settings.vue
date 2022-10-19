@@ -14,7 +14,7 @@ const i18n = useInternationalization([
   "cancel",
 ]);
 
-const reviewNumber = useReviewNumber();
+const { reviewNumber } = useReviewNumber();
 const form = reactive({
   number: reviewNumber.value,
 });

@@ -10,7 +10,6 @@ const defaultWords = {
 const store = useLocalStorage("words-store", defaultWords);
 const cache = useLocalStorage("words-cache", [[], []]);
 const translater = useTranslater();
-const reviewNumber = useReviewNumber();
 const now = new Date();
 const lastUpdate = useLocalStorage("last-update");
 
@@ -28,6 +27,7 @@ if (
   !cache.value[0].length ||
   !cache.value[1].length
 ) {
+  const { reviewNumber } = useReviewNumber();
   lastUpdate.value = now.getTime();
   cache.value = [
     getShuffled(reviewNumber.value),

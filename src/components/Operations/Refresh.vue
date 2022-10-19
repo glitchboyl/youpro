@@ -8,7 +8,7 @@ import useInternationalization from "@/utils/useInternationalization";
 
 const { cache } = useWords();
 const translater = useTranslater();
-const reviewNumber = useReviewNumber();
+const { reviewNumber } = useReviewNumber();
 const i18n = useInternationalization(["refresh", "confirm", "cancel"]);
 
 const refresh = () => {
@@ -21,11 +21,7 @@ const refresh = () => {
 
 <template>
   <a-tooltip :content="i18n['refresh'].value" position="right" mini>
-    <a-button
-      @click="refresh"
-      type="primary"
-      shape="circle"
-    >
+    <a-button @click="refresh" type="primary" shape="circle">
       <template #icon>
         <icon-refresh />
       </template>
