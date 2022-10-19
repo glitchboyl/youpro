@@ -22,17 +22,3 @@ const EToC = computed(() => cache.value[1].length || 0);
     </template>
   </div>
 </template>
-
-<style scoped>
-.words-container {
-  box-sizing: border-box;
-  width: var(--words-container-width);
-  background-color: var(--color-bg-4);
-  left: 50%;
-  top: var(--top-boundary);
-  min-height: 240px;
-  margin-left: calc(0px - var(--words-container-width) / 2);
-  padding: 24px;
-  position: relative;
-}
-</style>

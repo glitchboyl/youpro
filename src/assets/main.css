@@ -1,5 +1,46 @@
-@import './base.css';
+@import "./base.css";
 
 body {
-	background-color: rgb(var(--arcoblue-1));
+  background-color: rgb(var(--arcoblue-1));
+}
+
+.words-container {
+  box-sizing: border-box;
+  background-color: var(--color-bg-4);
+  min-height: 240px;
+  padding: 24px;
+  position: relative;
+}
+
+.words-container,
+.words-container-skeleton {
+  top: var(--top-boundary);
+  width: var(--words-container-width);
+  left: 50%;
+  margin-left: calc(0px - var(--words-container-width) / 2);
+  position: relative;
+}
+
+.operations,
+.operations-container-skeleton {
+  top: var(--top-boundary);
+  left: calc(50% + var(--words-container-width) / 2);
+  margin-left: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: fixed;
+}
+
+.operations > *,
+.operations-container-skeleton > * {
+  font-size: 16px !important;
+  margin-top: 12px;
+}
+
+.operations-container-skeleton .translater-skeleton {
+  width: 70px;
+}
+.operations-container-skeleton .translater-skeleton .arco-skeleton-line-row {
+  border-radius: 12px;
 }

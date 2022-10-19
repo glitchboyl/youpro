@@ -7,8 +7,8 @@
 </template>
 
 <style>
-.button-skeleton {
-	margin-top: 12px;
-  transform: scale(0.667) translateX(-12px);
+.button-skeleton .arco-skeleton-shape {
+  width: 32px;
+  height: 32px;
 }
 </style>
