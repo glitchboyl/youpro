@@ -10,10 +10,11 @@ const defaultWords = {
 const store = useLocalStorage("words-store", defaultWords);
 const cache = useLocalStorage("words-cache", [[], []]);
 const translater = useTranslater();
+const { reviewNumber } = useReviewNumber();
 const now = new Date();
 const lastUpdate = useLocalStorage("last-update");
 
-export function getShuffled(n) {
+function getShuffled(n) {
   const currentWords = cache.value[translater.value].map(([word]) => word);
   return Object.keys(store.value)
     .filter((word) => !currentWords.includes(word))
@@ -27,12 +28,18 @@ if (
   !cache.value[0].length ||
   !cache.value[1].length
 ) {
-  const { reviewNumber } = useReviewNumber();
   lastUpdate.value = now.getTime();
   cache.value = [
     getShuffled(reviewNumber.value),
     getShuffled(reviewNumber.value),
   ];
+}
+
+export function refresh() {
+  const currentWords = cache.value[translater.value];
+  if (currentWords.length < reviewNumber.value) {
+    currentWords.push(...getShuffled(reviewNumber.value - currentWords.length));
+  }
 }
 
 export default function useWords() {

@@ -20,8 +20,7 @@ const exportWords = () => {
 
 <template>
   <a-tooltip :content="i18n['exportWords'].value" position="right" mini>
-    <a-button
-		type="primary" @click="exportWords" shape="circle">
+    <a-button type="primary" @click="exportWords" shape="circle">
       <template #icon>
         <icon-export />
       </template>

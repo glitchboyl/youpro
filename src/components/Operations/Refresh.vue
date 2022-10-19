@@ -1,22 +1,12 @@
 <script setup>
 import { IconRefresh } from "@arco-design/web-vue/es/icon";
 import { reactive, ref } from "vue";
-import useWords, { getShuffled } from "@/utils/useWords";
-import useTranslater from "@/utils/useTranslater";
-import useReviewNumber from "@/utils/useReviewNumber";
+import { refresh } from "@/utils/useWords";
 import useInternationalization from "@/utils/useInternationalization";
 
-const { cache } = useWords();
-const translater = useTranslater();
-const { reviewNumber } = useReviewNumber();
 const i18n = useInternationalization(["refresh", "confirm", "cancel"]);
 
-const refresh = () => {
-  const currentWords = cache.value[translater.value];
-  if (currentWords.length < reviewNumber.value) {
-    currentWords.push(...getShuffled(reviewNumber.value - currentWords.length));
-  }
-};
+const emit = defineEmits(["change", "delete"]);
 </script>
 
 <template>

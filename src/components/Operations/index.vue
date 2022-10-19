@@ -7,6 +7,7 @@ const IncreaseWord = defineAsyncComponent(() => import("./IncreaseWord.vue"));
 const Settings = defineAsyncComponent(() => import("./Settings.vue"));
 const Refresh = defineAsyncComponent(() => import("./Refresh.vue"));
 const ExportWords = defineAsyncComponent(() => import("./ExportWords.vue"));
+const ImportWords = defineAsyncComponent(() => import("./ImportWords.vue"));
 const Progress = defineAsyncComponent(() => import("./Progress.vue"))
 const Github = defineAsyncComponent(() => import("./Github.vue"));
 
@@ -20,6 +21,7 @@ const popupVisible2 = ref(true);
     <settings />
     <refresh />
     <export-words />
+    <import-words />
     <Progress />
     <github />
     <!-- <a-trigger

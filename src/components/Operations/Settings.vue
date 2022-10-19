@@ -46,11 +46,7 @@ const handleCancel = () => (visible.value = false);
 
 <template>
   <a-tooltip :content="i18n['settings'].value" position="right" mini>
-    <a-button
-      @click="handleClick"
-      type="primary"
-      shape="circle"
-    >
+    <a-button @click="handleClick" type="primary" shape="circle">
       <template #icon>
         <icon-settings />
       </template>

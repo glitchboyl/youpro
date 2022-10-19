@@ -7,7 +7,7 @@ body {
 .words-container {
   box-sizing: border-box;
   background-color: var(--color-bg-4);
-  min-height: 240px;
+  min-height: 420px;
   padding: 24px;
   position: relative;
 }
@@ -16,7 +16,7 @@ body {
 .words-container-skeleton {
   top: var(--top-boundary);
   width: var(--words-container-width);
-  left: 50%;
+  left: 45%;
   margin-left: calc(0px - var(--words-container-width) / 2);
   position: relative;
 }
@@ -24,7 +24,7 @@ body {
 .operations,
 .operations-container-skeleton {
   top: var(--top-boundary);
-  left: calc(50% + var(--words-container-width) / 2);
+  left: calc(45% + var(--words-container-width) / 2);
   margin-left: 24px;
   display: flex;
   flex-direction: column;
