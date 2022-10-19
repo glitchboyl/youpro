@@ -68,7 +68,6 @@ const chineseRule = {
 <template>
   <a-tooltip :content="i18n['increaseWord'].value" position="right" mini>
     <a-button
-      style="margin-top: 12px"
       @click="visible = true"
       type="primary"
       status="success"

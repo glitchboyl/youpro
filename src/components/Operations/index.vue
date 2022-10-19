@@ -1,20 +1,12 @@
 <script setup>
 import { defineAsyncComponent } from "vue";
-import ButtonSkeleton from './ButtonSkeleton.vue';
+import asyncButton from "./asyncButton";
 
 const Translater = defineAsyncComponent(() => import("./Translater.vue"));
-const IncreaseWord = defineAsyncComponent({
-  loader: () => import("./IncreaseWord.vue"),
-  loadingComponent: ButtonSkeleton
-});
-const Settings = defineAsyncComponent({
-  loader: () => import("./Settings.vue"),
-  loadingComponent: ButtonSkeleton
-});
-const Refresh = defineAsyncComponent({
-  loader: () => import("./Refresh.vue"),
-  loadingComponent: ButtonSkeleton
-});
+const IncreaseWord = asyncButton(() => import("./IncreaseWord.vue"));
+const Settings = asyncButton(() => import("./Settings.vue"));
+const Refresh = asyncButton(() => import("./Refresh.vue"));
+const Github = asyncButton(() => import("./Github.vue"));
 </script>
 
 <template>
@@ -32,14 +24,14 @@ const Refresh = defineAsyncComponent({
     <increase-word />
     <settings />
     <refresh />
+    <github />
   </div>
 </template>
 
-<style scoped>
+<style>
 .operations {
   top: var(--top-boundary);
   left: calc(50% + var(--words-container-width) / 2);
-  margin-top: 12px;
   margin-left: 24px;
   display: flex;
   flex-direction: column;
@@ -51,5 +43,10 @@ const Refresh = defineAsyncComponent({
   width: 70px;
   border-radius: 12px;
   overflow: hidden;
+}
+
+.operations > * {
+  font-size: 16px!important;
+  margin-top: 12px;
 }
 </style>

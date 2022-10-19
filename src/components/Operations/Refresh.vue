@@ -22,7 +22,6 @@ const refresh = () => {
 <template>
   <a-tooltip :content="i18n['refresh'].value" position="right" mini>
     <a-button
-      style="margin-top: 12px"
       @click="refresh"
       type="primary"
       shape="circle"
