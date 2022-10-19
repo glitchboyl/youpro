@@ -5,15 +5,17 @@ import useTranlater from "@/utils/useTranslater";
 import useReviewNumber from "@/utils/useReviewNumber";
 const WordItem = defineAsyncComponent(() => import("./WordItem.vue"));
 
-const { cache } = useWords();
+const { store, cache } = useWords();
 const translater = useTranlater();
 const { reviewNumber } = useReviewNumber();
-const CToE = computed(() =>
-  Math.min(cache.value[0].length || 0, reviewNumber.value)
-);
-const EToC = computed(() =>
-  Math.min(cache.value[1].length || 0, reviewNumber.value)
-);
+const words = Object.keys(store.value);
+const getWords = (type) => () =>
+  Math.min(
+    cache.value[type]?.filter(([word]) => words.includes(word)).length || 0,
+    reviewNumber.value
+  );
+const CToE = computed(getWords(0));
+const EToC = computed(getWords(1));
 </script>
 
 <template>

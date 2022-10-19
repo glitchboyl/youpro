@@ -1,5 +1,5 @@
 <script setup>
-import { IconExport } from "@arco-design/web-vue/es/icon";
+import { IconDownload } from "@arco-design/web-vue/es/icon";
 import useWords from "@/utils/useWords";
 import useInternationalization from "@/utils/useInternationalization";
 
@@ -22,7 +22,7 @@ const exportWords = () => {
   <a-tooltip :content="i18n['exportWords'].value" position="right" mini>
     <a-button type="primary" @click="exportWords" shape="circle">
       <template #icon>
-        <icon-export />
+        <icon-download />
       </template>
     </a-button>
   </a-tooltip>

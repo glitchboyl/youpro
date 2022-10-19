@@ -1,5 +1,5 @@
 <script setup>
-import { IconImport } from "@arco-design/web-vue/es/icon";
+import { IconUpload } from "@arco-design/web-vue/es/icon";
 import useWords, { refresh } from "@/utils/useWords";
 import useInternationalization from "@/utils/useInternationalization";
 
@@ -35,7 +35,7 @@ const importWords = ([{ file }]) => {
       <template #upload-button>
         <a-button type="primary" shape="circle">
           <template #icon>
-            <icon-import />
+            <icon-upload />
           </template>
         </a-button>
       </template>

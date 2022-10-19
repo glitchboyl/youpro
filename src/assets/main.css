@@ -34,8 +34,11 @@ body {
 
 .operations > *,
 .operations-container-skeleton > * {
-  font-size: 16px !important;
   margin-top: 12px;
+}
+
+.operations .arco-btn {
+  font-size: 16px !important;
 }
 
 .operations-container-skeleton .translater-skeleton {

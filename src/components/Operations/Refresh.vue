@@ -1,12 +1,8 @@
 <script setup>
 import { IconRefresh } from "@arco-design/web-vue/es/icon";
-import { reactive, ref } from "vue";
 import { refresh } from "@/utils/useWords";
 import useInternationalization from "@/utils/useInternationalization";
-
 const i18n = useInternationalization(["refresh", "confirm", "cancel"]);
-
-const emit = defineEmits(["change", "delete"]);
 </script>
 
 <template>

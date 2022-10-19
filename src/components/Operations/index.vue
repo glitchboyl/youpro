@@ -24,37 +24,6 @@ const popupVisible2 = ref(true);
     <import-words />
     <Progress />
     <github />
-    <!-- <a-trigger
-      :trigger="['click', 'hover']"
-      clickToClose
-      position="right"
-      v-model:popupVisible="popupVisible2"
-    >
-      <div
-        :class="`button-trigger ${
-          popupVisible2 ? 'button-trigger-active' : ''
-        }`"
-      >
-        <icon-close v-if="popupVisible2" />
-        <icon-menu v-else />
-      </div>
-      <template #content>
-        <a-menu
-          mode="popButton"
-          :tooltipProps="{ position: 'right' }"
-          level-indent
-        >
-          <a-menu-item key="1">
-            <template #icon><IconBug></IconBug></template>
-            Bugs
-          </a-menu-item>
-          <a-menu-item key="2">
-            <template #icon><IconBulb></IconBulb></template>
-            Ideas
-          </a-menu-item>
-        </a-menu>
-      </template>
-    </a-trigger> -->
   </div>
 </template>
 

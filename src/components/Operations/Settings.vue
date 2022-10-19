@@ -69,7 +69,7 @@ const handleCancel = () => (visible.value = false);
         :label="i18n['reviewNumber'].value"
         label-col-flex="100px"
       >
-        <a-input-number v-model="form.number" :min="1" :max="100" />
+        <a-input-number v-model="form.number" :min="1" :max="300" />
       </a-form-item>
     </a-form>
   </a-modal>
