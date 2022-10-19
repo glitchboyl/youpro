@@ -11,7 +11,7 @@ const { reviewNumber, reviewed } = useReviewNumber();
 const i18n = useInternationalization(["progress"]);
 
 const decimal = ref(0);
-const percent = computed(() => decimal.value * 100);
+const percent = computed(() => Math.ceil(decimal.value * 100));
 const status = computed(() => {
   if (percent.value >= 75) {
     return "";

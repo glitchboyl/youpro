@@ -70,7 +70,6 @@ const chineseRule = {
     <a-button
       @click="visible = true"
       type="primary"
-      status="success"
       shape="circle"
     >
       <template #icon>

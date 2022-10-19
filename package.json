@@ -13,7 +13,6 @@
     "@arco-design/web-vue": "^2.37.4",
     "@vitejs/plugin-vue": "^3.0.3",
     "consola": "^2.15.3",
-    "fs-extra": "^10.1.0",
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.8",
     "vite": "^3.0.9",

@@ -49,7 +49,6 @@ const handleCancel = () => (visible.value = false);
     <a-button
       @click="handleClick"
       type="primary"
-      status="warning"
       shape="circle"
     >
       <template #icon>

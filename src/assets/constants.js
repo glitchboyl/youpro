@@ -16,6 +16,7 @@ export const localeMap = {
   reviewNumber: ["复习数量", "Review number"],
   refresh: ["刷新", "Refresh"],
   progress: ["当前进度：", "Current progress: "],
+  exportWords: ["导出单词" , "Export words"],
   confirm: ["确定", "Confirm"],
   cancel: ["取消", "Cancel"],
   translatePlaceholder: ["翻译", "Translate it"],
