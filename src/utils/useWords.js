@@ -1,4 +1,3 @@
-import { reactive, watch } from "vue";
 import { useLocalStorage } from "vueposu";
 import useTranslater from "./useTranslater";
 import useReviewNumber from "./useReviewNumber";
@@ -36,7 +35,7 @@ if (
   ];
 } else {
   const words = Object.keys(store.value);
-  cache.value = cache.value[type]?.filter(([word]) => words.includes(word));
+  cache.value = cache.value.map(c => c.filter(([word]) => words.includes(word)));
 }
 
 export function refresh() {

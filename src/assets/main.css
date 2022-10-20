@@ -9,7 +9,6 @@ body {
   background-color: var(--color-bg-4);
   min-height: 420px;
   padding: 24px;
-  position: relative;
 }
 
 .words-container,
@@ -18,7 +17,7 @@ body {
   width: var(--words-container-width);
   left: var(--words-container-left);
   margin-left: calc(0px - var(--words-container-width) / 2);
-  position: relative;
+  position: absolute;
 }
 
 .operations,
