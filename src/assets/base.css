@@ -1,4 +1,5 @@
 body {
-	--top-boundary: 60px;
-	--words-container-width: 520px;
+  --top-boundary: 60px;
+  --words-container-width: 520px;
+  --words-container-left: 45%;
 }

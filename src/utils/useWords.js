@@ -1,4 +1,4 @@
-import { reactive, watch } from 'vue';
+import { reactive, watch } from "vue";
 import { useLocalStorage } from "vueposu";
 import useTranslater from "./useTranslater";
 import useReviewNumber from "./useReviewNumber";
@@ -14,11 +14,6 @@ const translater = useTranslater();
 const { reviewNumber } = useReviewNumber();
 const now = new Date();
 const lastUpdate = useLocalStorage("last-update");
-watch(cache, () => {
-  console.log('asdasdasd')
-}, {
-  deep: true
-})
 
 function getShuffled(n) {
   const currentWords = cache.value[translater.value].map(([word]) => word);
@@ -39,6 +34,9 @@ if (
     getShuffled(reviewNumber.value),
     getShuffled(reviewNumber.value),
   ];
+} else {
+  const words = Object.keys(store.value);
+  cache.value = cache.value[type]?.filter(([word]) => words.includes(word));
 }
 
 export function refresh() {

@@ -11,8 +11,8 @@ watch(translater, () =>
 
 <template>
   <a-switch
-    checked-color="#165DFF"
-    unchecked-color="#165DFF"
+    checked-color="#14C9C9"
+    unchecked-color="#14C9C9"
     :checked-value="1"
     :unchecked-value="0"
     v-model="translater"
