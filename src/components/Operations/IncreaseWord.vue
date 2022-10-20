@@ -32,7 +32,6 @@ const handleBeforeOk = (done) => {
     done(!errors);
   });
 };
-const handleCancel = () => (visible.value = false);
 const handleClose = () => formRef.value.resetFields();
 
 const englishRule = {
