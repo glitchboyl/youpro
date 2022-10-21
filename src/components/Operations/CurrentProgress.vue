@@ -8,7 +8,7 @@ import useInternationalization from "@/utils/useInternationalization";
 const { cache } = useWords();
 const translater = useTranslater();
 const { reviewNumber, reviewed } = useReviewNumber();
-const i18n = useInternationalization(["currentProgress"]);
+const i18n = useInternationalization(["current-progress"]);
 
 const decimal = ref(0);
 const percent = computed(() => Math.ceil(decimal.value * 100));
@@ -30,7 +30,7 @@ watchEffect(() => {
 
 <template>
   <a-tooltip
-    :content="`${i18n['currentProgress'].value}${percent}%`"
+    :content="`${i18n['current-progress'].value}${percent}%`"
     position="right"
     mini
   >

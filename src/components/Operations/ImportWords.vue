@@ -4,7 +4,7 @@ import useWords, { refresh } from "@/utils/useWords";
 import useInternationalization from "@/utils/useInternationalization";
 
 const { store } = useWords();
-const i18n = useInternationalization(["importWords"]);
+const i18n = useInternationalization(["import-words"]);
 
 const reader = new FileReader();
 const importWords = ([{ file }]) => {
@@ -23,7 +23,7 @@ const importWords = ([{ file }]) => {
 </script>
 
 <template>
-  <a-tooltip :content="i18n['importWords'].value" position="right" mini>
+  <a-tooltip :content="i18n['import-words'].value" position="right" mini>
     <a-upload
       action="/"
       accept=".json"

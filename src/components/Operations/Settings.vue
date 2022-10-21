@@ -9,7 +9,7 @@ const visible = ref(false);
 
 const i18n = useInternationalization([
   "settings",
-  "reviewNumber",
+  "review-number",
   "confirm",
   "cancel",
 ]);
@@ -64,7 +64,7 @@ const handleSetup = (done) => {
     <a-form :model="form" ref="formRef" label-align="left">
       <a-form-item
         field="number"
-        :label="i18n['reviewNumber'].value"
+        :label="i18n['review-number'].value"
         label-col-flex="100px"
       >
         <a-input-number v-model="form.number" :min="1" :max="300" />

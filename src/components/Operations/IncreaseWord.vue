@@ -12,8 +12,8 @@ const { store, cache, words } = useWords();
 const { reviewNumber } = useReviewNumber();
 const translater = useTranslater();
 const i18n = useInternationalization([
-  "increaseWord",
-  "increaseNotification",
+  "increase-word",
+  "increase-notification",
   "confirm",
   "cancel",
 ]);
@@ -33,7 +33,7 @@ const handleIncrease = (done) => {
       if (cache.value[translater.value].length < reviewNumber.value) {
         cache.value[translater.value].push([english, STATUS.DEFAULT]);
       }
-      Notification.success(i18n["increaseNotification"].value);
+      Notification.success(i18n["increase-notification"].value);
     }
     done(!errors);
   });
@@ -69,7 +69,7 @@ const chineseRule = {
 </script>
 
 <template>
-  <a-tooltip :content="i18n['increaseWord'].value" position="right" mini>
+  <a-tooltip :content="i18n['increase-word'].value" position="right" mini>
     <a-button @click="visible = true" type="primary" shape="circle">
       <template #icon>
         <icon-plus />
@@ -80,7 +80,7 @@ const chineseRule = {
   <a-modal
     :width="400"
     v-model:visible="visible"
-    :title="i18n['increaseWord'].value"
+    :title="i18n['increase-word'].value"
     :ok-text="i18n['confirm'].value"
     :cancel-text="i18n['cancel'].value"
     :mask-closable="false"

@@ -10,11 +10,11 @@ import { EnglishRegExp, STATUS } from "@/assets/constants";
 
 const { store, cache, words } = useWords();
 const i18n = useInternationalization([
-  "editWord",
-  "editNotification",
-  "deleteWord",
-  "deletePrompt",
-  "deleteNotification",
+  "edit-word",
+  "edit-notification",
+  "delete-word",
+  "delete-prompt",
+  "delete-notification",
   "confirm",
   "cancel",
 ]);
@@ -29,18 +29,6 @@ watchEffect(() => {
   form.chinese = form.english ? [...store.value[form.english]] : [];
 });
 
-const handleEdit = (done) => {
-  formRef.value.validate().then((errors) => {
-    if (!errors) {
-      const { english, chinese } = form;
-      store.value[english] = chinese;
-      if (cache.value[translater.value].length < reviewNumber.value) {
-        cache.value[translater.value].push([english, STATUS.DEFAULT]);
-      }
-    }
-    done(!errors);
-  });
-};
 const handleDelete = () => {
   cache.value.forEach((queue) => {
     const index = queue.findIndex(([word]) => word === form.english);
@@ -50,8 +38,18 @@ const handleDelete = () => {
   });
   delete store.value[form.english];
   form.english = "";
-  Notification.success(i18n["deleteNotification"].value);
+  Notification.success(i18n["delete-notification"].value);
   refresh();
+};
+const handleEdit = (done) => {
+  formRef.value.validate().then((errors) => {
+    if (!errors) {
+      const { english, chinese } = form;
+      store.value[english] = chinese;
+      Notification.success(i18n["edit-notification"].value);
+    }
+    done(!errors);
+  });
 };
 const handleClose = () => formRef.value.resetFields();
 
@@ -68,7 +66,7 @@ const chineseRule = {
 </script>
 
 <template>
-  <a-tooltip :content="i18n['editWord'].value" position="right" mini>
+  <a-tooltip :content="i18n['edit-word'].value" position="right" mini>
     <a-button @click="visible = true" type="primary" shape="circle">
       <template #icon>
         <icon-edit />
@@ -79,7 +77,7 @@ const chineseRule = {
   <a-modal
     :width="520"
     v-model:visible="visible"
-    :title="i18n['editWord'].value"
+    :title="i18n['edit-word'].value"
     :ok-text="i18n['confirm'].value"
     :cancel-text="i18n['cancel'].value"
     :mask-closable="false"
@@ -100,7 +98,7 @@ const chineseRule = {
           <a-option v-for="word in words" :key="word">{{ word }}</a-option>
         </a-select>
         <a-popconfirm
-          :content="i18n['deletePrompt'].value"
+          :content="i18n['delete-prompt'].value"
           type="error"
           :ok-text="i18n['confirm'].value"
           :cancel-text="i18n['cancel'].value"
@@ -109,7 +107,7 @@ const chineseRule = {
           }"
           @ok="handleDelete"
         >
-          <a-tooltip :content="i18n['deleteWord'].value" position="right" mini>
+          <a-tooltip :content="i18n['delete-word'].value" position="right" mini>
             <a-button
               type="primary"
               status="danger"

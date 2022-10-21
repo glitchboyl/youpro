@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, watchEffect } from "vue";
 import { STATUS } from "@/assets/constants";
 import {
   IconCheckCircleFill,
@@ -20,11 +20,27 @@ const { store, cache } = useWords();
 const { reviewed } = useReviewNumber();
 
 const word = computed(() => cache.value[type][index]);
-const english = word.value[0];
-const chinese = store.value[word.value[0]];
+const english = ref("");
+const chinese = ref([]);
 const status = ref(word.value[1]);
 
-const i18n = useInternationalization(["translatePlaceholder", "cheat"]);
+watchEffect(() => {
+  english.value = word.value[0];
+  chinese.value = store.value[english.value];
+});
+watch(
+  status,
+  (n, o) => {
+    if (n === STATUS.TRUE || o === STATUS.TRUE) {
+      reviewed[type].value++;
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+
+const i18n = useInternationalization(["translate-placeholder", "cheat"]);
 
 let speech = null;
 const synth = window.speechSynthesis;
@@ -49,17 +65,6 @@ function translate(text) {
     ? STATUS.TRUE
     : STATUS.FALSE;
 }
-watch(
-  status,
-  (n, o) => {
-    if (n === STATUS.TRUE || o === STATUS.TRUE) {
-      reviewed[type].value++;
-    }
-  },
-  {
-    immediate: true,
-  }
-);
 function cheat() {
   status.value = cache.value[type][index][1] = STATUS.LOSER;
 }
@@ -93,7 +98,7 @@ function cheat() {
       </template>
       <template v-else>
         <a-input
-          :placeholder="i18n['translatePlaceholder'].value"
+          :placeholder="i18n['translate-placeholder'].value"
           @change="translate"
           :error="status === STATUS.FALSE"
         >

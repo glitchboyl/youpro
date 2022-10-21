@@ -4,7 +4,7 @@ import useWords from "@/utils/useWords";
 import useInternationalization from "@/utils/useInternationalization";
 
 const { store } = useWords();
-const i18n = useInternationalization(["exportWords"]);
+const i18n = useInternationalization(["export-words"]);
 
 const exportWords = () => {
   const a = document.createElement("a");
@@ -19,7 +19,7 @@ const exportWords = () => {
 </script>
 
 <template>
-  <a-tooltip :content="i18n['exportWords'].value" position="right" mini>
+  <a-tooltip :content="i18n['export-words'].value" position="right" mini>
     <a-button type="primary" @click="exportWords" shape="circle">
       <template #icon>
         <icon-download />
