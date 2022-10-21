@@ -40,6 +40,7 @@ const handleDelete = () => {
   form.english = "";
   Notification.success(i18n["delete-notification"].value);
   refresh();
+  visible.value = false;
 };
 const handleEdit = (done) => {
   formRef.value.validate().then((errors) => {

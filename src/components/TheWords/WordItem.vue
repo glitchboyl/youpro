@@ -25,8 +25,10 @@ const chinese = ref([]);
 const status = ref(word.value[1]);
 
 watchEffect(() => {
-  english.value = word.value[0];
-  chinese.value = store.value[english.value];
+  if (word.value) {
+    english.value = word.value[0];
+    chinese.value = store.value[english.value];
+  }
 });
 watch(
   status,
