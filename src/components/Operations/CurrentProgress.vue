@@ -5,10 +5,10 @@ import useTranslater from "@/utils/useTranslater";
 import useReviewNumber from "@/utils/useReviewNumber";
 import useInternationalization from "@/utils/useInternationalization";
 
-const { cache } = useWords();
+const { cache, words } = useWords();
 const translater = useTranslater();
 const { reviewNumber, reviewed } = useReviewNumber();
-const i18n = useInternationalization(["current-progress"]);
+const i18n = useInternationalization(["current-progress", "congratulation"]);
 
 const decimal = ref(0);
 const percent = computed(() => Math.ceil(decimal.value * 100));
@@ -24,7 +24,9 @@ const status = computed(() => {
   }
 });
 watchEffect(() => {
-  decimal.value = reviewed[translater.value].value / reviewNumber.value;
+  decimal.value =
+    reviewed[translater.value].value /
+    Math.min(reviewNumber.value, words.value.length);
 });
 </script>
 
@@ -36,4 +38,11 @@ watchEffect(() => {
   >
     <a-progress size="mini" :status="status" :percent="decimal" animation />
   </a-tooltip>
+  <img
+    v-if="percent >= 100"
+    src="/public/favicon.ico"
+    style="bottom: 0; left: 0; position: fixed"
+    alt="Easter egg"
+    :title="i18n['congratulation'].value"
+  />
 </template>

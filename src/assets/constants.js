@@ -33,6 +33,7 @@ export const i18nMap = {
   "delete-notification": ["删除成功。", "Delete successed."],
   cheat: ["我是废物，我要看答案", "I'm LOSER and view the answer"],
   github: ["在 GitHub 上查看源代码", "View it on GitHub"],
+  congratulation: ["恭喜你！你做到了！", "Congratulations! You did it!"],
   "empty-text": [
     "没有单词，请添加单词或刷新。",
     "No words, please increase word or refresh.",
