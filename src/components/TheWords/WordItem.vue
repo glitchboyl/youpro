@@ -58,7 +58,7 @@ function translate(text) {
     ? text
         .split("；")
         .filter((e) => e)
-        .every((ch) => chinese.includes(ch))
+        .every((ch) => chinese.value.includes(ch))
       ? STATUS.TRUE
       : STATUS.FALSE
     : text === english
