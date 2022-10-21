@@ -14,14 +14,14 @@ const i18n = useInternationalization(["empty-text"]);
 
 const quantity = ref(0);
 watch(
-  cache,
+  () => cache.value[type].length,
   () => {
     quantity.value = Math.min(
       cache.value[type].length || 0,
       reviewNumber.value
     );
   },
-  { deep: true, immediate: true }
+  { immediate: true }
 );
 </script>
 

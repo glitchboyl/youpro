@@ -12,6 +12,7 @@ const i18n = useInternationalization(["current-progress", "congratulation"]);
 
 const decimal = ref(0);
 const percent = computed(() => Math.ceil(decimal.value * 100));
+const total = computed(() => Math.min(reviewNumber.value, words.value.length));
 const status = computed(() => {
   if (percent.value >= 75) {
     return "";
@@ -24,9 +25,9 @@ const status = computed(() => {
   }
 });
 watchEffect(() => {
-  decimal.value =
-    reviewed[translater.value].value /
-    Math.min(reviewNumber.value, words.value.length);
+  decimal.value = total.value
+    ? reviewed[translater.value].value / total.value
+    : total.value;
 });
 </script>
 

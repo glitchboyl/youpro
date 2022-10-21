@@ -33,7 +33,7 @@ watchEffect(() => {
 watch(
   status,
   (n, o) => {
-    if (n === STATUS.TRUE || o === STATUS.TRUE) {
+    if (n === STATUS.CORRECT || o === STATUS.CORRECT) {
       reviewed[type].value++;
     }
   },
@@ -61,11 +61,11 @@ function translate(text) {
         .split("；")
         .filter((e) => e)
         .every((ch) => chinese.value.includes(ch))
-      ? STATUS.TRUE
-      : STATUS.FALSE
+      ? STATUS.CORRECT
+      : STATUS.INCORRECT
     : text === english.value
-    ? STATUS.TRUE
-    : STATUS.FALSE;
+    ? STATUS.CORRECT
+    : STATUS.INCORRECT;
 }
 function cheat() {
   status.value = cache.value[type][index][1] = STATUS.LOSER;
@@ -76,11 +76,11 @@ function cheat() {
   <div class="word-item">
     <span class="status">
       <icon-check-circle-fill
-        v-if="status === STATUS.TRUE"
+        v-if="status === STATUS.CORRECT"
         style="color: rgb(var(--green-4))"
       />
       <icon-close-circle-fill
-        v-else-if="status === STATUS.FALSE"
+        v-else-if="status === STATUS.INCORRECT"
         style="color: rgb(var(--red-4))"
       />
       <icon-thumb-down-fill
@@ -93,7 +93,7 @@ function cheat() {
       <a-typography-title :heading="6" @click="type && speak()">
         {{ type ? english : chinese.join("；") }}
       </a-typography-title>
-      <template v-if="status === STATUS.TRUE || status === STATUS.LOSER">
+      <template v-if="status === STATUS.CORRECT || status === STATUS.LOSER">
         <span class="translation" @click="!type && speak()">
           {{ type ? chinese.join("；") : english }}
         </span>
@@ -102,7 +102,7 @@ function cheat() {
         <a-input
           :placeholder="i18n['translate-placeholder'].value"
           @change="translate"
-          :error="status === STATUS.FALSE"
+          :error="status === STATUS.INCORRECT"
         >
           <template #append>
             <a-tooltip :content="i18n['cheat'].value" position="top" mini>

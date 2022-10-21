@@ -1,8 +1,8 @@
 // word recite status
 export const STATUS = {
   DEFAULT: 0,
-  TRUE: 1,
-  FALSE: 2,
+  CORRECT: 1,
+  INCORRECT: 2,
   LOSER: 3,
 };
 

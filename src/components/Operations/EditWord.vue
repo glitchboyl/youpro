@@ -9,6 +9,7 @@ import useInternationalization from "@/utils/useInternationalization";
 import { EnglishRegExp, STATUS } from "@/assets/constants";
 
 const { store, cache, words } = useWords();
+const { reviewed } = useReviewNumber();
 const i18n = useInternationalization([
   "edit-word",
   "edit-notification",
@@ -30,10 +31,13 @@ watchEffect(() => {
 });
 
 const handleDelete = () => {
-  cache.value.forEach((queue) => {
-    const index = queue.findIndex(([word]) => word === form.english);
+  cache.value.forEach((list, i) => {
+    const index = list.findIndex(([word]) => word === form.english);
     if (index !== -1) {
-      queue.splice(index, 1);
+      if (list[index][1] === STATUS.CORRECT) {
+        reviewed[i].value--;
+      }
+      list.splice(index, 1);
     }
   });
   delete store.value[form.english];
