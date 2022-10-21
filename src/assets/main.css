@@ -1,6 +1,7 @@
 @import "./base.css";
 
 body {
+  width: 100%!important;
   background-color: rgb(var(--arcoblue-1));
 }
 
@@ -13,16 +14,16 @@ body {
 
 .words-container,
 .words-container-skeleton {
-  top: var(--top-boundary);
+  margin: var(--boundary) 0;
   width: var(--words-container-width);
   left: var(--words-container-left);
   margin-left: calc(0px - var(--words-container-width) / 2);
-  position: absolute;
+  position: relative;
 }
 
 .operations,
 .operations-container-skeleton {
-  top: var(--top-boundary);
+  top: var(--boundary);
   left: calc(var(--words-container-left) + var(--words-container-width) / 2 + 36px);
   display: flex;
   flex-direction: column;

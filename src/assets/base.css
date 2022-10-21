@@ -5,7 +5,7 @@ html {
 
 body {
   overflow: hidden;
-  --top-boundary: 60px;
+  --boundary: 60px;
   --words-container-width: 520px;
   --words-container-left: 45%;
 }
