@@ -46,7 +46,7 @@ let speech = null;
 const synth = window.speechSynthesis;
 const speak = useThrottleFn(() => {
   if (!speech) {
-    speech = new window.SpeechSynthesisUtterance(english);
+    speech = new window.SpeechSynthesisUtterance(english.value);
   }
   if (!synth.speaking) {
     synth.speak(speech);
@@ -61,7 +61,7 @@ function translate(text) {
         .every((ch) => chinese.value.includes(ch))
       ? STATUS.TRUE
       : STATUS.FALSE
-    : text === english
+    : text === english.value
     ? STATUS.TRUE
     : STATUS.FALSE;
 }
