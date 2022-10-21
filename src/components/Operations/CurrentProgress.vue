@@ -41,7 +41,7 @@ watchEffect(() => {
   </a-tooltip>
   <img
     v-if="percent >= 100"
-    src="/public/favicon.ico"
+    src="/favicon.ico"
     style="bottom: 0; left: 0; position: fixed"
     alt="Easter egg"
     :title="i18n['congratulation'].value"
