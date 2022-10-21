@@ -3,11 +3,12 @@ import { defineAsyncComponent } from "vue";
 
 const Translater = defineAsyncComponent(() => import("./Translater.vue"));
 const IncreaseWord = defineAsyncComponent(() => import("./IncreaseWord.vue"));
+const EditWord = defineAsyncComponent(() => import("./EditWord.vue"));
 const Settings = defineAsyncComponent(() => import("./Settings.vue"));
 const Refresh = defineAsyncComponent(() => import("./Refresh.vue"));
 const ExportWords = defineAsyncComponent(() => import("./ExportWords.vue"));
 const ImportWords = defineAsyncComponent(() => import("./ImportWords.vue"));
-const Progress = defineAsyncComponent(() => import("./Progress.vue"))
+const CurrentProgress = defineAsyncComponent(() => import("./CurrentProgress.vue"))
 const Github = defineAsyncComponent(() => import("./Github.vue"));
 </script>
 
@@ -15,11 +16,12 @@ const Github = defineAsyncComponent(() => import("./Github.vue"));
   <div class="operations">
     <translater />
     <increase-word />
+    <edit-word />
     <settings />
     <refresh />
     <export-words />
     <import-words />
-    <Progress />
+    <current-progress />
     <github />
   </div>
 </template>

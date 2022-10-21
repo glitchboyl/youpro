@@ -9,15 +9,15 @@ const i18n = useInternationalization(["importWords"]);
 const reader = new FileReader();
 const importWords = ([{ file }]) => {
   reader.readAsText(file, "utf-8");
-  reader.onload = function (evt) {
-    const words = JSON.parse(evt.target.result);
+  reader.onload = function (e) {
+    const words = JSON.parse(e.target.result);
     Object.keys(words).forEach(
       (word) =>
         (store.value[word] = !store.value[word]
           ? words[word]
           : [...new Set([...store.value[word], ...words[word]])])
     );
-		refresh();
+    refresh();
   };
 };
 </script>

@@ -31,7 +31,7 @@ const numberRule = {
   },
 };
 
-const handleBeforeOk = (done) => {
+const handleSetup = (done) => {
   formRef.value.validate().then((errors) => {
     if (!errors) {
       const { number } = form;
@@ -58,7 +58,7 @@ const handleBeforeOk = (done) => {
     :ok-text="i18n['confirm'].value"
     :cancel-text="i18n['cancel'].value"
     :mask-closable="false"
-    @before-ok="handleBeforeOk"
+    @before-ok="handleSetup"
     @cancel="visible = false"
   >
     <a-form :model="form" ref="formRef" label-align="left">

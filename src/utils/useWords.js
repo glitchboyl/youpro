@@ -1,3 +1,4 @@
+import { computed } from "vue";
 import { useLocalStorage } from "vueposu";
 import useTranslater from "./useTranslater";
 import useReviewNumber from "./useReviewNumber";
@@ -9,6 +10,7 @@ const defaultWords = {
 
 const store = useLocalStorage("words-store", defaultWords);
 const cache = useLocalStorage("words-cache", [[], []]);
+const words = computed(() => Object.keys(store.value));
 const translater = useTranslater();
 const { reviewNumber } = useReviewNumber();
 const now = new Date();
@@ -16,7 +18,7 @@ const lastUpdate = useLocalStorage("last-update");
 
 function getShuffled(n) {
   const currentWords = cache.value[translater.value].map(([word]) => word);
-  return Object.keys(store.value)
+  return words.value
     .filter((word) => !currentWords.includes(word))
     .sort(() => (Math.random() > 0.5 ? -1 : 1))
     .slice(0, n)
@@ -34,8 +36,9 @@ if (
     getShuffled(reviewNumber.value),
   ];
 } else {
-  const words = Object.keys(store.value);
-  cache.value = cache.value.map(c => c.filter(([word]) => words.includes(word)));
+  cache.value = cache.value.map((c) =>
+    c.filter(([word]) => words.value.includes(word))
+  );
 }
 
 export function refresh() {
@@ -49,5 +52,6 @@ export default function useWords() {
   return {
     store,
     cache,
+    words
   };
 }
