@@ -18,11 +18,15 @@ const lastUpdate = useLocalStorage("last-update");
 
 function getShuffled(n) {
   const currentWords = cache.value[translater.value].map(([word]) => word);
-  return words.value
-    .filter((word) => !currentWords.includes(word))
-    .sort(() => (Math.random() > 0.5 ? -1 : 1))
-    .slice(0, n)
-    .map((word) => [word, STATUS.DEFAULT]);
+  const shuffled = words.value.filter((word) => !currentWords.includes(word));
+  const lastIndex = shuffled.length - 1;
+  for (let i = 0; i < lastIndex; i++) {
+    const random = Math.floor(Math.random() * (lastIndex - i + 1)) + i;
+    let temp = shuffled[random];
+    shuffled[random] = shuffled[i];
+    shuffled[i] = temp;
+  }
+  return shuffled.slice(0, n).map((word) => [word, STATUS.DEFAULT]);
 }
 
 if (
@@ -52,6 +56,6 @@ export default function useWords() {
   return {
     store,
     cache,
-    words
+    words,
   };
 }
