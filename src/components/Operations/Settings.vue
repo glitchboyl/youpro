@@ -2,6 +2,7 @@
 import { IconSettings } from "@arco-design/web-vue/es/icon";
 import { reactive, ref } from "vue";
 import { useLocalStorage } from "vueposu";
+import { refresh } from "@/utils/useWords";
 import useReviewNumber from "@/utils/useReviewNumber";
 import useInternationalization from "@/utils/useInternationalization";
 
@@ -36,6 +37,7 @@ const handleSetup = (done) => {
     if (!errors) {
       const { number } = form;
       reviewNumber.value = number;
+      refresh();
     }
     done(!errors);
   });
