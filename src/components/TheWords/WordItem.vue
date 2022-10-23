@@ -56,17 +56,25 @@ const speak = useThrottleFn(() => {
 }, 500);
 
 function translate(text) {
-  status.value = cache.value[type][index][1] = type
-    ? text
-        .split("；")
-        .filter((e) => e)
-        .every((ch) => chinese.value.includes(ch))
-      ? STATUS.CORRECT
-      : STATUS.INCORRECT
-    : text === english.value
-    ? STATUS.CORRECT
-    : STATUS.INCORRECT;
+  let translation;
+  let resultStatus = STATUS.INCORRECT;
+  if (type) {
+    translation = text.split("；").filter((e) => e);
+    if (
+      translation.length &&
+      translation.every((ch) => ch && chinese.value.includes(ch))
+    ) {
+      resultStatus = STATUS.CORRECT;
+    }
+  } else {
+    translation = text;
+    if (translation === english.value) {
+      resultStatus = STATUS.CORRECT;
+    }
+  }
+  status.value = cache.value[type][index][1] = resultStatus;
 }
+
 function cheat() {
   status.value = cache.value[type][index][1] = STATUS.LOSER;
 }
