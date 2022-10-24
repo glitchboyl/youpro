@@ -20,9 +20,10 @@ function getShuffled(n) {
   const currentWords = cache.value[translater.value].map(([word]) => word);
   const shuffled = words.value.filter((word) => !currentWords.includes(word));
   const lastIndex = shuffled.length - 1;
+  let temp;
   for (let i = 0; i < lastIndex; i++) {
     const random = Math.floor(Math.random() * (lastIndex - i + 1)) + i;
-    let temp = shuffled[random];
+    temp = shuffled[random];
     shuffled[random] = shuffled[i];
     shuffled[i] = temp;
   }
