@@ -12,6 +12,7 @@ import { useThrottleFn } from "vueposu";
 import useWords from "@/utils/useWords";
 import useReviewNumber from "@/utils/useReviewNumber";
 import useInternationalization from "@/utils/useInternationalization";
+import shuffle from '@/utils/shuffle';
 
 const props = defineProps(["type", "index"]);
 const { type, index } = props;
@@ -27,7 +28,7 @@ const status = ref(word.value[1]);
 watchEffect(() => {
   if (word.value) {
     english.value = word.value[0];
-    chinese.value = store.value[english.value];
+    chinese.value = shuffle(store.value[english.value]);
   }
 });
 watch(

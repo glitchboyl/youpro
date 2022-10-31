@@ -2,6 +2,7 @@ import { computed } from "vue";
 import { useLocalStorage } from "vueposu";
 import useTranslater from "./useTranslater";
 import useReviewNumber from "./useReviewNumber";
+import shuffle from './shuffle';
 import { STATUS, defaultWord, defaultTranslate } from "@/assets/constants";
 
 const defaultWords = {
@@ -18,15 +19,7 @@ const lastUpdate = useLocalStorage("last-update");
 
 function getShuffled(n) {
   const currentWords = cache.value[translater.value].map(([word]) => word);
-  const shuffled = words.value.filter((word) => !currentWords.includes(word));
-  const lastIndex = shuffled.length - 1;
-  let temp;
-  for (let i = 0; i < lastIndex; i++) {
-    const random = Math.floor(Math.random() * (lastIndex - i + 1)) + i;
-    temp = shuffled[random];
-    shuffled[random] = shuffled[i];
-    shuffled[i] = temp;
-  }
+  const shuffled = shuffle(words.value.filter((word) => !currentWords.includes(word)));
   return shuffled.slice(0, n).map((word) => [word, STATUS.DEFAULT]);
 }
 
