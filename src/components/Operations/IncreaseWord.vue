@@ -3,13 +3,13 @@ import { reactive, ref } from "vue";
 import { IconPlus } from "@arco-design/web-vue/es/icon";
 import { Notification } from "@arco-design/web-vue";
 import useWords from "@/utils/useWords";
-import useReviewNumber from "@/utils/useReviewNumber";
+import useSettings from "@/utils/useSettings";
 import useTranslater from "@/utils/useTranslater";
 import useInternationalization from "@/utils/useInternationalization";
 import { EnglishRegExp, STATUS } from "@/assets/constants";
 
 const { store, cache, words } = useWords();
-const { reviewNumber } = useReviewNumber();
+const { reviewNumber } = useSettings();
 const translater = useTranslater();
 const i18n = useInternationalization([
   "increase-word",
@@ -50,7 +50,7 @@ const englishRule = {
         cb("Word can only be in English.");
       }
       if (words.value.includes(value)) {
-        cb("Word already Exists.");
+        cb("Word already exists.");
       }
       resolve();
     });

@@ -2,12 +2,12 @@
 import { ref, computed, watchEffect } from "vue";
 import useWords from "@/utils/useWords";
 import useTranslater from "@/utils/useTranslater";
-import useReviewNumber from "@/utils/useReviewNumber";
+import useSettings from "@/utils/useSettings";
 import useInternationalization from "@/utils/useInternationalization";
 
 const { cache, words } = useWords();
 const translater = useTranslater();
-const { reviewNumber, reviewed } = useReviewNumber();
+const { reviewNumber, reviewed } = useSettings();
 const i18n = useInternationalization(["current-progress", "congratulation"]);
 
 const decimal = ref(0);

@@ -1,7 +1,7 @@
 import { computed } from "vue";
 import { useLocalStorage } from "vueposu";
 import useTranslater from "./useTranslater";
-import useReviewNumber from "./useReviewNumber";
+import useSettings from "./useSettings";
 import shuffle from './shuffle';
 import { STATUS, defaultWord, defaultTranslate } from "@/assets/constants";
 
@@ -12,8 +12,9 @@ const defaultWords = {
 const store = useLocalStorage("words-store", defaultWords);
 const cache = useLocalStorage("words-cache", [[], []]);
 const words = computed(() => Object.keys(store.value));
+
 const translater = useTranslater();
-const { reviewNumber } = useReviewNumber();
+const { reviewNumber } = useSettings();
 const now = new Date();
 const lastUpdate = useLocalStorage("last-update");
 

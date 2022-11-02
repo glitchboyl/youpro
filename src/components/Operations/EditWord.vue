@@ -3,13 +3,13 @@ import { reactive, ref, watchEffect } from "vue";
 import { IconEdit, IconDelete } from "@arco-design/web-vue/es/icon";
 import { Notification } from "@arco-design/web-vue";
 import useWords, { refresh } from "@/utils/useWords";
-import useReviewNumber from "@/utils/useReviewNumber";
+import useSettings from "@/utils/useSettings";
 import useTranslater from "@/utils/useTranslater";
 import useInternationalization from "@/utils/useInternationalization";
 import { EnglishRegExp, STATUS } from "@/assets/constants";
 
 const { store, cache, words } = useWords();
-const { reviewed } = useReviewNumber();
+const { reviewed } = useSettings();
 const i18n = useInternationalization([
   "edit-word",
   "edit-notification",

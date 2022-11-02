@@ -1,43 +1,53 @@
 <script setup>
-import { IconSettings } from "@arco-design/web-vue/es/icon";
 import { reactive, ref } from "vue";
+import { IconSettings } from "@arco-design/web-vue/es/icon";
+import { Notification } from "@arco-design/web-vue";
 import { useLocalStorage } from "vueposu";
 import { refresh } from "@/utils/useWords";
-import useReviewNumber from "@/utils/useReviewNumber";
+import useSettings from "@/utils/useSettings";
+import useTranslater from "@/utils/useTranslater";
 import useInternationalization from "@/utils/useInternationalization";
 
 const visible = ref(false);
-
+const translater = useTranslater();
 const i18n = useInternationalization([
   "settings",
   "review-number",
+  "translation-number",
+  "random-single-zh",
+  "review-number-validator",
+  "setting-notification",
   "confirm",
   "cancel",
 ]);
 
-const { reviewNumber } = useReviewNumber();
+const { reviewNumber, translationNumber, randomSingleZH } = useSettings();
 const form = reactive({
-  number: reviewNumber.value,
+  reviewNumber: reviewNumber.value,
+  translationNumber: translationNumber.value,
+  randomSingleZH: randomSingleZH.value,
 });
 const formRef = ref();
 
-const numberRule = {
+const reviewNumberRule = {
   validator: (value, cb) => {
     return new Promise((resolve) => {
       if (value < 1) {
-        cb("asd");
+        cb(i18n["review-number-validator"].value);
       }
       resolve();
     });
   },
 };
 
-const handleSetup = (done) => {
+const handleSetting = (done) => {
   formRef.value.validate().then((errors) => {
     if (!errors) {
-      const { number } = form;
-      reviewNumber.value = number;
+      reviewNumber.value = form.reviewNumber;
+      translationNumber.value = form.translationNumber;
+      randomSingleZH.value = form.randomSingleZH;
       refresh();
+      Notification.success(i18n["setting-notification"].value);
     }
     done(!errors);
   });
@@ -60,16 +70,37 @@ const handleSetup = (done) => {
     :ok-text="i18n['confirm'].value"
     :cancel-text="i18n['cancel'].value"
     :mask-closable="false"
-    @before-ok="handleSetup"
+    @before-ok="handleSetting"
     @cancel="visible = false"
   >
     <a-form :model="form" ref="formRef" label-align="left">
       <a-form-item
-        field="number"
+        field="reviewNumber"
         :label="i18n['review-number'].value"
+        :rules="reviewNumberRule"
         label-col-flex="100px"
       >
-        <a-input-number v-model="form.number" :min="1" :max="300" />
+        <a-input-number v-model="form.reviewNumber" :min="1" :max="300" />
+      </a-form-item>
+      <!-- <a-form-item
+        field="translationNumber"
+        :label="i18n['translation-number'].value"
+        label-col-flex="150px"
+        v-show="translater"
+      >
+        <a-input-number v-model="form.translationNumber" :min="1" :max="300" />
+      </a-form-item> -->
+      <a-form-item
+        field="randomSingleZH"
+        :label="i18n['random-single-zh'].value"
+        label-col-flex="100px"
+        v-show="!translater"
+      >
+        <a-switch
+          :checked-value="1"
+          :unchecked-value="0"
+          v-model="form.randomSingleZH"
+        />
       </a-form-item>
     </a-form>
   </a-modal>

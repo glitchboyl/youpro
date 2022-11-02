@@ -1,7 +1,7 @@
 <script setup>
 import { ref, toRef, watch, defineAsyncComponent } from "vue";
 import useWords from "@/utils/useWords";
-import useReviewNumber from "@/utils/useReviewNumber";
+import useSettings from "@/utils/useSettings";
 import useInternationalization from "@/utils/useInternationalization";
 const WordItem = defineAsyncComponent(() => import("./WordItem.vue"));
 
@@ -9,12 +9,12 @@ const props = defineProps(["type"]);
 const { type } = props;
 
 const { cache } = useWords();
-const { reviewNumber } = useReviewNumber();
+const { reviewNumber } = useSettings();
 const i18n = useInternationalization(["empty-text"]);
 
 const quantity = ref(0);
 watch(
-  () => cache.value[type].length,
+  [() => cache.value[type].length, reviewNumber],
   () => {
     quantity.value = Math.min(
       cache.value[type].length || 0,

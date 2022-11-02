@@ -10,15 +10,15 @@ import {
 } from "@arco-design/web-vue/es/icon";
 import { useThrottleFn } from "vueposu";
 import useWords from "@/utils/useWords";
-import useReviewNumber from "@/utils/useReviewNumber";
+import useSettings from "@/utils/useSettings";
 import useInternationalization from "@/utils/useInternationalization";
-import shuffle from '@/utils/shuffle';
+import shuffle from "@/utils/shuffle";
 
 const props = defineProps(["type", "index"]);
 const { type, index } = props;
 
 const { store, cache } = useWords();
-const { reviewed } = useReviewNumber();
+const { reviewed, randomSingleZH } = useSettings();
 
 const word = computed(() => cache.value[type][index]);
 const english = ref("");
@@ -100,7 +100,13 @@ function cheat() {
     </span>
     <div class="content">
       <a-typography-title :heading="6" @click="type && speak()">
-        {{ type ? english : chinese.join("；") }}
+        {{
+          type
+            ? english
+            : randomSingleZH
+            ? chinese[Math.floor(Math.random() * chinese.length)]
+            : chinese.join("；")
+        }}
       </a-typography-title>
       <template v-if="status === STATUS.CORRECT || status === STATUS.LOSER">
         <span class="translation" @click="!type && speak()">
