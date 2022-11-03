@@ -4,6 +4,9 @@ body {
   width: 100%!important;
   background-color: rgb(var(--arcoblue-1));
 }
+body[arco-theme='dark'] {
+  background-color: var(--color-bg-1);
+}
 
 .words-container {
   box-sizing: border-box;
