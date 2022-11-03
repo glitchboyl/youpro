@@ -2,8 +2,9 @@
 import { ref, computed, watch, watchEffect } from "vue";
 import { STATUS } from "@/assets/constants";
 import {
-  IconCheckCircleFill,
-  IconCloseCircleFill,
+  IconFaceSmileFill,
+  IconFaceFrownFill,
+  IconFaceMehFill,
   IconThumbDownFill,
   IconQuestionCircleFill,
   IconEye,
@@ -18,7 +19,7 @@ const props = defineProps(["type", "index"]);
 const { type, index } = props;
 
 const { store, cache } = useWords();
-const { reviewed, randomSingleZH } = useSettings();
+const { reviewed, translationNumber, randomSingleZH } = useSettings();
 
 const word = computed(() => cache.value[type][index]);
 const english = ref("");
@@ -61,11 +62,19 @@ function translate(text) {
   let resultStatus = STATUS.INCORRECT;
   if (type) {
     translation = text.split("；").filter((e) => e);
+    let i = 0;
+    const minimumTransilations = Math.min(
+      chinese.value.length,
+      translationNumber.value
+    );
     if (
       translation.length &&
-      translation.every((ch) => ch && chinese.value.includes(ch))
+      translation.every((ch) => ch && chinese.value.includes(ch) && ++i) &&
+      i >= minimumTransilations
     ) {
       resultStatus = STATUS.CORRECT;
+    } else if (i > 0 && i < minimumTransilations) {
+      resultStatus = STATUS.CLOSER;
     }
   } else {
     translation = text;
@@ -84,13 +93,17 @@ function cheat() {
 <template>
   <div class="word-item">
     <span class="status">
-      <icon-check-circle-fill
+      <icon-face-smile-fill
         v-if="status === STATUS.CORRECT"
         style="color: rgb(var(--green-4))"
       />
-      <icon-close-circle-fill
+      <icon-face-frown-fill
         v-else-if="status === STATUS.INCORRECT"
         style="color: rgb(var(--red-4))"
+      />
+      <icon-face-meh-fill
+        v-else-if="status === STATUS.CLOSER"
+        style="color: rgb(var(--gold-4))"
       />
       <icon-thumb-down-fill
         v-else-if="status === STATUS.LOSER"

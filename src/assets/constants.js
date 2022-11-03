@@ -4,6 +4,7 @@ export const STATUS = {
   CORRECT: 1,
   INCORRECT: 2,
   LOSER: 3,
+  CLOSER: 4,
 };
 
 export const defaultWord = "abandon";

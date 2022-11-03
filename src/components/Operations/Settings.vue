@@ -82,14 +82,14 @@ const handleSetting = (done) => {
       >
         <a-input-number v-model="form.reviewNumber" :min="1" :max="300" />
       </a-form-item>
-      <!-- <a-form-item
+      <a-form-item
         field="translationNumber"
         :label="i18n['translation-number'].value"
         label-col-flex="150px"
         v-show="translater"
       >
         <a-input-number v-model="form.translationNumber" :min="1" :max="300" />
-      </a-form-item> -->
+      </a-form-item>
       <a-form-item
         field="randomSingleZH"
         :label="i18n['random-single-zh'].value"
