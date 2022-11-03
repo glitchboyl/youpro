@@ -9,12 +9,17 @@ const app = createApp(App);
 app.use(ArcoVue);
 app.mount("#app");
 
-const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
-
-darkThemeMq.addListener((e) => {
+const darkThemeMq = window.matchMedia("(prefers-color-scheme:dark)");
+const callback = (e) => {
   if (e.matches) {
     document.body.setAttribute("arco-theme", "dark");
   } else {
     document.body.removeAttribute("arco-theme");
   }
-});
+};
+callback(darkThemeMq);
+if (typeof darkThemeMq.addEventListener === "function") {
+  darkThemeMq.addEventListener("change", callback);
+} else if (typeof darkThemeMq.addListener === "function") {
+  darkThemeMq.addListener(callback);
+}
