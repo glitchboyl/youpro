@@ -18,8 +18,4 @@ const callback = (e) => {
   }
 };
 callback(darkThemeMq);
-if (typeof darkThemeMq.addEventListener === "function") {
-  darkThemeMq.addEventListener("change", callback);
-} else if (typeof darkThemeMq.addListener === "function") {
-  darkThemeMq.addListener(callback);
-}
+darkThemeMq.addEventListener("change", callback);
