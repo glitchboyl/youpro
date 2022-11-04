@@ -57,23 +57,34 @@ const speak = useThrottleFn(() => {
   }
 }, 500);
 
+function setStatus(s) {
+  return (status.value = cache.value[type][index][1] = s);
+}
+
 function translate(text) {
   let translation;
   let resultStatus = STATUS.INCORRECT;
   if (type) {
     translation = text.split("；").filter((e) => e);
-    let i = 0;
+    let validate = true;
+    let n = 0;
     const minimumTransilations = Math.min(
       chinese.value.length,
       translationNumber.value
     );
-    if (
-      translation.length &&
-      translation.every((ch) => ch && chinese.value.includes(ch) && ++i) &&
-      i >= minimumTransilations
-    ) {
+    for (const ch of translation) {
+      if (!ch) {
+        continue;
+      }
+      if (chinese.value.includes(ch)) {
+        n++;
+      } else if (validate) {
+        validate = false;
+      }
+    }
+    if (validate) {
       resultStatus = STATUS.CORRECT;
-    } else if (i > 0 && i < minimumTransilations) {
+    } else if (n > 0 && n < minimumTransilations) {
       resultStatus = STATUS.CLOSER;
     }
   } else {
@@ -82,11 +93,11 @@ function translate(text) {
       resultStatus = STATUS.CORRECT;
     }
   }
-  status.value = cache.value[type][index][1] = resultStatus;
+  setStatus(resultStatus);
 }
 
 function cheat() {
-  status.value = cache.value[type][index][1] = STATUS.LOSER;
+  setStatus(STATUS.LOSER);
 }
 </script>
 
