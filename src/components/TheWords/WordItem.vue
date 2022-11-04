@@ -35,8 +35,14 @@ watchEffect(() => {
 watch(
   status,
   (n, o) => {
-    if (n === STATUS.CORRECT || o === STATUS.CORRECT) {
-      reviewed[type].value++;
+    const s =
+      n === STATUS.CORRECT || o === STATUS.CORRECT
+        ? 0
+        : n === STATUS.LOSER || o === STATUS.LOSER
+        ? 1
+        : 2;
+    if (s < 2) {
+      reviewed[type][s].value++;
     }
   },
   {
@@ -82,7 +88,7 @@ function translate(text) {
         validate = false;
       }
     }
-    if (validate) {
+    if (validate && n >= minimumTransilations) {
       resultStatus = STATUS.CORRECT;
     } else if (n > 0 && n < minimumTransilations) {
       resultStatus = STATUS.CLOSER;

@@ -39,6 +39,9 @@ export const i18nMap = {
   cheat: ["我是废物，我要看答案", "I'm LOSER and view the answer"],
   github: ["在 GitHub 上查看源代码。", "View it on GitHub"],
   congratulation: ["恭喜你！你做到了！", "Congratulations! You did it!"],
+  encouragement: ["还不错！继续加油！", "Not bad! Keep going!"],
+  attention: ["不在状态呢，要小心了！", "Oops, need to pay attention!"],
+  trash: ["回家吧你个废物", "Go home you TRASH"],
   "empty-text": [
     "没有单词，请添加单词或刷新。",
     "No words, please increase word or refresh.",

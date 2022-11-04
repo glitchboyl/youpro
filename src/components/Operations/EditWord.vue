@@ -34,8 +34,14 @@ const handleDelete = () => {
   cache.value.forEach((list, i) => {
     const index = list.findIndex(([word]) => word === form.english);
     if (index !== -1) {
-      if (list[index][1] === STATUS.CORRECT) {
-        reviewed[i].value--;
+      const s =
+        list[index][1] === STATUS.CORRECT
+          ? 0
+          : list[index][1] === STATUS.LOSER
+          ? 1
+          : 2;
+      if (s < 2) {
+        reviewed[i][s].value--;
       }
       list.splice(index, 1);
     }

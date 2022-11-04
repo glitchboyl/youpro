@@ -11,8 +11,17 @@ const computeSetting = (i) => ({
 const reviewNumber = computed(computeSetting(0));
 const translationNumber = computed(computeSetting(1));
 const randomSingleZH = computed(computeSetting(2));
-const reviewed = [ref(0), ref(0)];
+const reviewed = [
+  [ref(0), ref(0)],
+  [ref(0), ref(0)],
+];
 
 export default function useSettings() {
-  return { settings, reviewNumber, translationNumber, randomSingleZH, reviewed };
+  return {
+    settings,
+    reviewNumber,
+    translationNumber,
+    randomSingleZH,
+    reviewed,
+  };
 }
