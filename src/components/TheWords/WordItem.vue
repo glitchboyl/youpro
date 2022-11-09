@@ -71,7 +71,7 @@ function translate(text) {
   let translation;
   let resultStatus = STATUS.INCORRECT;
   if (type) {
-    translation = text.split("；").filter((e) => e);
+    translation = [...new Set(text.split("；").filter((e) => e))];
     let validate = true;
     let n = 0;
     const minimumTransilations = Math.min(
