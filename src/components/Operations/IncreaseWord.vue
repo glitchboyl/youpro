@@ -6,7 +6,12 @@ import useWords from "@/utils/useWords";
 import useSettings from "@/utils/useSettings";
 import useTranslater from "@/utils/useTranslater";
 import useInternationalization from "@/utils/useInternationalization";
-import { EnglishRegExp, STATUS } from "@/assets/constants";
+import {
+  EnglishRegExp,
+  ChineseRegExp,
+  chineseRule,
+  STATUS,
+} from "@/assets/constants";
 
 const { store, cache, words } = useWords();
 const { reviewNumber } = useSettings();
@@ -24,6 +29,32 @@ const form = reactive({
 });
 const formRef = ref();
 const visible = ref(false);
+const chineseInputRef = ref();
+
+const englishRule = {
+  validator: (value, cb) =>
+    new Promise((resolve) => {
+      if (!value) {
+        cb("Word can't be empty.");
+      }
+      if (!EnglishRegExp.test(value)) {
+        cb("Word can only be in English.");
+      }
+      if (words.value.includes(value)) {
+        cb("Word already exists.");
+      }
+      resolve();
+    }),
+};
+
+const handleSplit = (input, e) => {
+  if (input && ChineseRegExp.test(input)) {
+    const chs = input.split(ChineseRegExp).filter((e) => e);
+    form.chinese = [...new Set(form.chinese.concat(chs))];
+    chineseInputRef.value.blur();
+    chineseInputRef.value.focus();
+  }
+};
 
 const handleIncrease = (done) => {
   formRef.value.validate().then((errors) => {
@@ -39,33 +70,6 @@ const handleIncrease = (done) => {
   });
 };
 const handleClose = () => formRef.value.resetFields();
-
-const englishRule = {
-  validator: (value, cb) => {
-    return new Promise((resolve) => {
-      if (!value) {
-        cb("Word can't be empty.");
-      }
-      if (!EnglishRegExp.test(value)) {
-        cb("Word can only be in English.");
-      }
-      if (words.value.includes(value)) {
-        cb("Word already exists.");
-      }
-      resolve();
-    });
-  },
-};
-const chineseRule = {
-  validator: (value, cb) => {
-    return new Promise((resolve) => {
-      if (!value.length) {
-        cb("中文不能为空。");
-      }
-      resolve();
-    });
-  },
-};
 </script>
 
 <template>
@@ -92,11 +96,18 @@ const chineseRule = {
       <a-form-item field="english" label="English" :rules="englishRule">
         <a-input v-model="form.english" placeholder="English word" />
       </a-form-item>
-      <a-form-item field="chinese" label="中文" :rules="chineseRule">
+      <a-form-item
+        field="chinese"
+        label="中文"
+        :rules="chineseRule"
+        v-show="form.english"
+      >
         <a-input-tag
+          ref="chineseInputRef"
           placeholder="中文意思"
           v-model="form.chinese"
           unique-value
+          @input-value-change="handleSplit"
         />
       </a-form-item>
     </a-form>

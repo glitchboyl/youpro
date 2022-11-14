@@ -6,7 +6,7 @@ import useWords, { refresh } from "@/utils/useWords";
 import useSettings from "@/utils/useSettings";
 import useTranslater from "@/utils/useTranslater";
 import useInternationalization from "@/utils/useInternationalization";
-import { EnglishRegExp, STATUS } from "@/assets/constants";
+import { ChineseRegExp, chineseRule, STATUS } from "@/assets/constants";
 
 const { store, cache, words } = useWords();
 const { reviewed } = useSettings();
@@ -26,6 +26,8 @@ const form = reactive({
 });
 const formRef = ref();
 const visible = ref(false);
+const chineseInputRef = ref();
+
 watchEffect(() => {
   form.chinese = form.english ? [...store.value[form.english]] : [];
 });
@@ -52,6 +54,14 @@ const handleDelete = () => {
   refresh();
   visible.value = false;
 };
+const handleSplit = (input, e) => {
+  if (input && ChineseRegExp.test(input)) {
+    const chs = input.split(ChineseRegExp).filter((e) => e);
+    form.chinese = [...new Set(form.chinese.concat(chs))];
+    chineseInputRef.value.blur();
+    chineseInputRef.value.focus();
+  }
+};
 const handleEdit = (done) => {
   formRef.value.validate().then((errors) => {
     if (!errors) {
@@ -63,17 +73,6 @@ const handleEdit = (done) => {
   });
 };
 const handleClose = () => formRef.value.resetFields();
-
-const chineseRule = {
-  validator: (value, cb) => {
-    return new Promise((resolve) => {
-      if (!value.length) {
-        cb("中文不能为空。");
-      }
-      resolve();
-    });
-  },
-};
 </script>
 
 <template>
@@ -139,10 +138,12 @@ const chineseRule = {
         :rules="chineseRule"
       >
         <a-input-tag
+          ref="chineseInputRef"
           placeholder="中文意思"
           v-model="form.chinese"
           unique-value
           :disabled="!form.english"
+          @input-value-change="handleSplit"
         />
       </a-form-item>
     </a-form>

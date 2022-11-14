@@ -11,6 +11,17 @@ export const defaultWord = "abandon";
 export const defaultTranslate = ["放弃", "遗弃", "抛弃", "舍弃", "丢弃"];
 
 export const EnglishRegExp = /[a-zA-Z\-]+/;
+export const ChineseRegExp = /[;,:；，。：]+/g;
+
+export const chineseRule = {
+  validator: (value, cb) =>
+    new Promise((resolve) => {
+      if (!value.length) {
+        cb("中文不能为空。");
+      }
+      resolve();
+    }),
+};
 
 export const i18nMap = {
   "increase-word": ["增加新单词", "Increase word"],
@@ -20,7 +31,10 @@ export const i18nMap = {
   "review-number": ["复习数量", "Review number"],
   "translation-number": ["翻译数量", "Minimum of translation"],
   "random-single-zh": ["随机单个翻译", "Random single translation"],
-  "review-number-validator": ["复习数量不能小于 1。", "Review number can't less than 1."],
+  "review-number-validator": [
+    "复习数量不能小于 1。",
+    "Review number can't less than 1.",
+  ],
   refresh: ["刷新", "Refresh"],
   "current-progress": ["当前进度：", "Current progress: "],
   "export-words": ["导出单词", "Export words"],

@@ -39,7 +39,7 @@ watchEffect(() => {
 
 <template>
   <a-tooltip
-    :content="`${i18n['current-progress'].value}${percent}%`"
+    :content="`${i18n['current-progress'].value}${percent}% (${reviewed[translater][0].value}/${total})`"
     position="right"
     mini
   >
