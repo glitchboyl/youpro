@@ -14,6 +14,7 @@ import useWords from "@/utils/useWords";
 import useSettings from "@/utils/useSettings";
 import useInternationalization from "@/utils/useInternationalization";
 import shuffle from "@/utils/shuffle";
+import { ChineseRegExp } from "@/assets/constants";
 
 const props = defineProps(["type", "index"]);
 const { type, index } = props;
@@ -71,7 +72,7 @@ function translate(text) {
   let translation;
   let resultStatus = STATUS.INCORRECT;
   if (type) {
-    translation = [...new Set(text.split("；").filter((e) => e))];
+    translation = [...new Set(text.split(ChineseRegExp).filter((e) => e))];
     let validate = true;
     let n = 0;
     const minimumTransilations = Math.min(
