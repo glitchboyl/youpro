@@ -130,17 +130,22 @@ function cheat() {
       <icon-question-circle-fill v-else />
     </span>
     <div class="content">
-      <a-typography-title :heading="6" @click="type && speak()">
-        {{
-          type
-            ? english
-            : randomSingleZH
-            ? chinese[Math.floor(Math.random() * chinese.length)]
-            : chinese.join("；")
-        }}
+      <a-typography-title :heading="6">
+        <span :class="`${type ? 'speech' : ''}`" @click="type && speak()">
+          {{
+            type
+              ? english
+              : randomSingleZH
+              ? chinese[Math.floor(Math.random() * chinese.length)]
+              : chinese.join("；")
+          }}
+        </span>
       </a-typography-title>
       <template v-if="status === STATUS.CORRECT || status === STATUS.LOSER">
-        <span class="translation" @click="!type && speak()">
+        <span
+          :class="`translation ${!type ? 'speech' : ''}`"
+          @click="!type && speak()"
+        >
           {{ type ? chinese.join("；") : english }}
         </span>
       </template>
@@ -195,6 +200,13 @@ function cheat() {
 .word-item .arco-input-append {
   padding: 0;
   border: 0;
+}
+.word-item .speech {
+  cursor: url("./horn.cur"), help;
+  transform: color 0.3s;
+}
+.word-item .speech:hover {
+  color: var(--color-text-1);
 }
 .half-divider {
   --half-divider-left: 55px;
