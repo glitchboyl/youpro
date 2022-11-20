@@ -1,9 +1,9 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import { IconSettings } from "@arco-design/web-vue/es/icon";
 import { Notification } from "@arco-design/web-vue";
 import { useLocalStorage } from "vueposu";
-import { refresh } from "@/utils/useWords";
+import useWords, { refresh } from "@/utils/useWords";
 import useSettings from "@/utils/useSettings";
 import useTranslater from "@/utils/useTranslater";
 import useInternationalization from "@/utils/useInternationalization";
@@ -12,6 +12,7 @@ const visible = ref(false);
 const translater = useTranslater();
 const i18n = useInternationalization([
   "settings",
+  "store-number",
   "review-number",
   "translation-number",
   "random-single-zh",
@@ -21,6 +22,8 @@ const i18n = useInternationalization([
   "cancel",
 ]);
 
+const { store } = useWords();
+const storeNumber = computed(() => Object.keys(store.value).length);
 const { reviewNumber, translationNumber, randomSingleZH } = useSettings();
 const form = reactive({
   reviewNumber: reviewNumber.value,
@@ -74,6 +77,9 @@ const handleSetting = (done) => {
     @cancel="visible = false"
   >
     <a-form :model="form" ref="formRef" label-align="left">
+      <a-form-item :label="i18n['store-number'].value" label-col-flex="100px">
+        {{ storeNumber }}
+      </a-form-item>
       <a-form-item
         field="reviewNumber"
         :label="i18n['review-number'].value"
