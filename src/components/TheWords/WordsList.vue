@@ -28,7 +28,7 @@ watch(
 <template>
   <div class="words-container">
     <template v-if="quantity">
-      <template v-for="(,index) of quantity" :key="`${type}-${index}`">
+      <template v-for="(,index) of quantity" :key="`${type}-${cache[type][index][0]}`">
         <word-item :type="type" :index="index" />
       </template>
     </template>
