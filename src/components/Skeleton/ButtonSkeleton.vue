@@ -7,6 +7,7 @@
 </template>
 
 <style>
+.button-skeleton,
 .button-skeleton .arco-skeleton-shape {
   width: 32px;
   height: 32px;

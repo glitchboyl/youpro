@@ -19,3 +19,9 @@ import ButtonSkeleton from "./ButtonSkeleton.vue";
     <button-skeleton />
   </div>
 </template>
+
+<style>
+.translater-skeleton {
+  height: 24px;
+}
+</style>

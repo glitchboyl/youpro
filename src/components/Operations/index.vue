@@ -8,9 +8,7 @@ const Settings = defineAsyncComponent(() => import("./Settings.vue"));
 const Refresh = defineAsyncComponent(() => import("./Refresh.vue"));
 const ExportWords = defineAsyncComponent(() => import("./ExportWords.vue"));
 const ImportWords = defineAsyncComponent(() => import("./ImportWords.vue"));
-const CurrentProgress = defineAsyncComponent(() =>
-  import("./CurrentProgress.vue")
-);
+const Accuracy = defineAsyncComponent(() => import("./Accuracy.vue"));
 const Github = defineAsyncComponent(() => import("./Github.vue"));
 </script>
 
@@ -23,7 +21,7 @@ const Github = defineAsyncComponent(() => import("./Github.vue"));
     <refresh />
     <export-words />
     <import-words />
-    <current-progress />
+    <accuracy />
     <github />
   </div>
 </template>

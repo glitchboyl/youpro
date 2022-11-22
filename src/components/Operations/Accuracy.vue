@@ -9,7 +9,7 @@ const { cache, words } = useWords();
 const translater = useTranslater();
 const { reviewNumber, reviewed } = useSettings();
 const i18n = useInternationalization([
-  "current-progress",
+  "accuracy",
   "congratulation",
   "encouragement",
   "attention",
@@ -39,7 +39,7 @@ watchEffect(() => {
 
 <template>
   <a-tooltip
-    :content="`${i18n['current-progress'].value}${percent}% (${reviewed[translater][0].value}/${total})`"
+    :content="`${i18n['accuracy'].value}${percent}% (${reviewed[translater][0].value}/${total})`"
     position="right"
     mini
   >

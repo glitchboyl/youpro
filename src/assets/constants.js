@@ -37,7 +37,7 @@ export const i18nMap = {
     "Review number can't less than 1.",
   ],
   refresh: ["刷新", "Refresh"],
-  "current-progress": ["当前进度：", "Current progress: "],
+  "accuracy": ["正确率：", "Current accuracy: "],
   "export-words": ["导出单词", "Export words"],
   "import-words": ["导入单词", "Import words"],
   confirm: ["确定", "Confirm"],
