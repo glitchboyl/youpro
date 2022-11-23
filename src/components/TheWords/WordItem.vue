@@ -191,7 +191,7 @@ function cheat() {
 .word-item .content {
   flex: 1;
   color: var(--color-text-2);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 20px;
 }
 .word-item .translation {
