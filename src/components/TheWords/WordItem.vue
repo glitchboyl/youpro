@@ -91,7 +91,7 @@ function translate(text) {
     }
     if (validate && n >= minimumTransilations) {
       resultStatus = STATUS.CORRECT;
-    } else if (n > 0 && n < minimumTransilations) {
+    } else if (n > 0) {
       resultStatus = STATUS.CLOSER;
     }
   } else {
