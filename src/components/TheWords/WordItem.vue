@@ -133,12 +133,25 @@ function cheat() {
     </span>
     <div class="content">
       <a-typography-title :heading="6">
-        <button class="listen-button" v-show="listeningMode" @click="speak">
+        <button
+          class="listen-button"
+          v-show="
+            listeningMode &&
+            status !== STATUS.CORRECT &&
+            status !== STATUS.LOSER
+          "
+          @click="speak"
+        >
           <icon-sound-fill />
         </button>
         <span
-          v-show="!listeningMode"
+          v-show="
+            !listeningMode ||
+            status === STATUS.CORRECT ||
+            status === STATUS.LOSER
+          "
           :class="[type && 'speech']"
+          style="display: inline-block"
           @click="type && speak"
         >
           {{
@@ -152,8 +165,9 @@ function cheat() {
       </a-typography-title>
       <template v-if="status === STATUS.CORRECT || status === STATUS.LOSER">
         <span
-          :class="['translation', !type && 'speech']"
+          :class="[!type && 'speech']"
           @click="!type && speak()"
+          style="line-height: 32px; display: inline-block"
         >
           {{ type ? chinese.join("；") : english }}
         </span>
@@ -203,15 +217,9 @@ function cheat() {
   font-size: 13px;
   line-height: 20px;
 }
-.word-item .translation {
-  line-height: 32px;
-}
 .word-item .arco-input-append {
   padding: 0;
   border: 0;
-}
-.word-item .content span {
-  display: inline-block;
 }
 .word-item .listen-button {
   height: 24px;
