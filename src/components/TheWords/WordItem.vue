@@ -133,11 +133,9 @@ function cheat() {
     </span>
     <div class="content">
       <a-typography-title :heading="6">
-        <icon-sound-fill
-          class="listen-button"
-          v-show="listeningMode"
-          @click="speak"
-        />
+        <button class="listen-button" v-show="listeningMode" @click="speak">
+          <icon-sound-fill />
+        </button>
         <span
           v-show="!listeningMode"
           :class="[type && 'speech']"
@@ -216,8 +214,12 @@ function cheat() {
   display: inline-block;
 }
 .word-item .listen-button {
+  height: 24px;
+  padding: 0;
   font-size: 24px;
-  margin-bottom: -6px;
+  background-color: transparent;
+  border: 0;
+  display: flex;
   transform: color 0.3s;
   cursor: pointer;
 }
