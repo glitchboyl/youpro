@@ -28,6 +28,9 @@ const word = computed(() => cache.value[type][index]);
 const english = ref("");
 const chinese = ref([]);
 const status = ref(word.value[1]);
+const randomZH = computed(
+  () => chinese.value[Math.floor(Math.random() * chinese.value.length)]
+);
 
 watchEffect(() => {
   if (word.value) {
@@ -154,13 +157,7 @@ function cheat() {
           style="display: inline-block"
           @click="type && speak"
         >
-          {{
-            type
-              ? english
-              : randomSingleZH
-              ? chinese[Math.floor(Math.random() * chinese.length)]
-              : chinese.join("；")
-          }}
+          {{ type ? english : randomSingleZH ? randomZH : chinese.join("；") }}
         </span>
       </a-typography-title>
       <template v-if="status === STATUS.CORRECT || status === STATUS.LOSER">
