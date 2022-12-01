@@ -1,7 +1,7 @@
 import { ref, computed } from "vue";
 import { useLocalStorage } from "vueposu";
 
-const settings = useLocalStorage("settings", [10, 1, 0]);
+const settings = useLocalStorage("settings", [10, 1, 0, 0]);
 
 const computeSetting = (i) => ({
   get: () => settings.value[i],
@@ -11,6 +11,7 @@ const computeSetting = (i) => ({
 const reviewNumber = computed(computeSetting(0));
 const translationNumber = computed(computeSetting(1));
 const randomSingleZH = computed(computeSetting(2));
+const listeningMode = computed(computeSetting(3));
 const reviewed = [
   [ref(0), ref(0)],
   [ref(0), ref(0)],
@@ -22,6 +23,7 @@ export default function useSettings() {
     reviewNumber,
     translationNumber,
     randomSingleZH,
+    listeningMode,
     reviewed,
   };
 }

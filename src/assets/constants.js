@@ -32,6 +32,7 @@ export const i18nMap = {
   "review-number": ["复习数量", "Review number"],
   "translation-number": ["翻译数量", "Minimum of translation"],
   "random-single-zh": ["随机单个翻译", "Random single translation"],
+  "listening-mode": ["听力模式", "Listening mode"],
   "review-number-validator": [
     "复习数量不能小于 1。",
     "Review number can't less than 1.",

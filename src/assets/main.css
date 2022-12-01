@@ -1,10 +1,10 @@
 @import "./base.css";
 
 body {
-  width: 100%!important;
+  width: 100% !important;
   background-color: rgb(var(--arcoblue-1));
 }
-body[arco-theme='dark'] {
+body[arco-theme="dark"] {
   background-color: var(--color-bg-1);
 }
 
@@ -27,7 +27,9 @@ body[arco-theme='dark'] {
 .operations,
 .operations-container-skeleton {
   top: var(--boundary);
-  left: calc(var(--words-container-left) + var(--words-container-width) / 2 + 36px);
+  left: calc(
+    var(--words-container-left) + var(--words-container-width) / 2 + 36px
+  );
   display: flex;
   flex-direction: column;
   align-items: flex-start;

@@ -7,6 +7,7 @@ import {
   IconFaceMehFill,
   IconThumbDownFill,
   IconQuestionCircleFill,
+  IconSoundFill,
   IconEye,
 } from "@arco-design/web-vue/es/icon";
 import { useThrottleFn } from "vueposu";
@@ -20,7 +21,8 @@ const props = defineProps(["type", "index"]);
 const { type, index } = props;
 
 const { store, cache } = useWords();
-const { reviewed, translationNumber, randomSingleZH } = useSettings();
+const { reviewed, translationNumber, randomSingleZH, listeningMode } =
+  useSettings();
 
 const word = computed(() => cache.value[type][index]);
 const english = ref("");
@@ -131,7 +133,16 @@ function cheat() {
     </span>
     <div class="content">
       <a-typography-title :heading="6">
-        <span :class="`${type ? 'speech' : ''}`" @click="type && speak()">
+        <icon-sound-fill
+          class="listen-button"
+          v-show="listeningMode"
+          @click="speak"
+        />
+        <span
+          v-show="!listeningMode"
+          :class="[type && 'speech']"
+          @click="type && speak"
+        >
           {{
             type
               ? english
@@ -143,7 +154,7 @@ function cheat() {
       </a-typography-title>
       <template v-if="status === STATUS.CORRECT || status === STATUS.LOSER">
         <span
-          :class="`translation ${!type ? 'speech' : ''}`"
+          :class="['translation', !type && 'speech']"
           @click="!type && speak()"
         >
           {{ type ? chinese.join("；") : english }}
@@ -201,12 +212,27 @@ function cheat() {
   padding: 0;
   border: 0;
 }
+.word-item .content span {
+  display: inline-block;
+}
+.word-item .listen-button {
+  font-size: 24px;
+  margin-bottom: -6px;
+  transform: color 0.3s;
+  cursor: pointer;
+}
+.word-item .listen-button:hover {
+  color: var(--color-text-2);
+}
 .word-item .speech {
   cursor: url("./horn.cur"), help;
   transform: color 0.3s;
 }
 .word-item .speech:hover {
   color: var(--color-text-1);
+}
+.word-item .listen-button + .speech:hover {
+  color: var(--color-text-2);
 }
 .half-divider {
   --half-divider-left: 55px;

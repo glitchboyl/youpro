@@ -16,6 +16,7 @@ const i18n = useInternationalization([
   "review-number",
   "translation-number",
   "random-single-zh",
+  "listening-mode",
   "review-number-validator",
   "setting-notification",
   "confirm",
@@ -24,11 +25,13 @@ const i18n = useInternationalization([
 
 const { store } = useWords();
 const storeNumber = computed(() => Object.keys(store.value).length);
-const { reviewNumber, translationNumber, randomSingleZH } = useSettings();
+const { reviewNumber, translationNumber, randomSingleZH, listeningMode } =
+  useSettings();
 const form = reactive({
   reviewNumber: reviewNumber.value,
   translationNumber: translationNumber.value,
   randomSingleZH: randomSingleZH.value,
+  listeningMode: listeningMode.value,
 });
 const formRef = ref();
 
@@ -49,6 +52,7 @@ const handleSetting = (done) => {
       reviewNumber.value = form.reviewNumber;
       translationNumber.value = form.translationNumber;
       randomSingleZH.value = form.randomSingleZH;
+      listeningMode.value = form.listeningMode;
       refresh();
       Notification.success(i18n["setting-notification"].value);
     }
@@ -67,7 +71,7 @@ const handleSetting = (done) => {
   </a-tooltip>
 
   <a-modal
-    :width="320"
+    :width="360"
     v-model:visible="visible"
     :title="i18n['settings'].value"
     :ok-text="i18n['confirm'].value"
@@ -77,14 +81,14 @@ const handleSetting = (done) => {
     @cancel="visible = false"
   >
     <a-form :model="form" ref="formRef" label-align="left">
-      <a-form-item :label="i18n['store-number'].value" label-col-flex="100px">
+      <a-form-item :label="i18n['store-number'].value" label-col-flex="150px">
         {{ storeNumber }}
       </a-form-item>
       <a-form-item
         field="reviewNumber"
         :label="i18n['review-number'].value"
         :rules="reviewNumberRule"
-        label-col-flex="100px"
+        label-col-flex="150px"
       >
         <a-input-number v-model="form.reviewNumber" :min="1" :max="300" />
       </a-form-item>
@@ -99,7 +103,7 @@ const handleSetting = (done) => {
       <a-form-item
         field="randomSingleZH"
         :label="i18n['random-single-zh'].value"
-        label-col-flex="100px"
+        label-col-flex="150px"
         v-show="!translater"
       >
         <a-switch
@@ -107,6 +111,18 @@ const handleSetting = (done) => {
           :unchecked-value="0"
           v-model="form.randomSingleZH"
         />
+      </a-form-item>
+      <a-form-item
+        field="listeningMode"
+        :label="i18n['listening-mode'].value"
+        label-col-flex="150px"
+      >
+        <a-switch
+          :checked-value="1"
+          :unchecked-value="0"
+          v-model="form.listeningMode"
+        />
+        <!-- <template #extra> will be hard! </template> -->
       </a-form-item>
     </a-form>
   </a-modal>
