@@ -163,7 +163,7 @@ function cheat() {
       <template v-if="status === STATUS.CORRECT || status === STATUS.LOSER">
         <span
           :class="[!type && 'speech']"
-          @click="!type && speak()"
+          @click="!type && speak"
           style="line-height: 32px; display: inline-block"
         >
           {{ type ? chinese.join("；") : english }}
@@ -221,10 +221,11 @@ function cheat() {
 .word-item .listen-button {
   height: 24px;
   padding: 0;
-  font-size: 24px;
+  font-size: 22px;
   background-color: transparent;
   border: 0;
   display: flex;
+  align-items: center;
   transform: color 0.3s;
   cursor: pointer;
 }

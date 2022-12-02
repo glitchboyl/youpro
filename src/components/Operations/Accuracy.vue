@@ -19,21 +19,38 @@ const i18n = useInternationalization([
 const decimal = ref(0);
 const percent = computed(() => Math.ceil(decimal.value * 100));
 const total = computed(() => Math.min(reviewNumber.value, words.value.length));
-const status = computed(() => {
-  if (percent.value >= 75) {
-    return ["", "./UDidIt.png", i18n["congratulation"].value];
-  } else if (percent.value >= 50) {
-    return ["success", "./NotBad.png", i18n["encouragement"].value];
-  } else if (percent.value >= 25) {
-    return ["warning", "./Oops.png", i18n["attention"].value];
-  } else {
-    return ["danger", "./Trash.png", i18n["trash"].value];
-  }
-});
+const status = ref("danger");
+const easterEgg = ref("./Trash.png");
+const tip = ref(i18n["trash"].value);
+const direction = ref("right");
+
 watchEffect(() => {
   decimal.value = total.value
     ? reviewed[translater.value][0].value / total.value
     : total.value;
+});
+watchEffect(() => {
+  if (percent.value >= 75) {
+    status.value = "success";
+    easterEgg.value = percent.value >= 100 ? "./favicon.ico" : "./UDidIt.png";
+    tip.value = i18n["congratulation"].value;
+    direction.value = "right";
+  } else if (percent.value >= 50) {
+    status.value = "normal";
+    easterEgg.value = "./NotBad.png";
+    tip.value = i18n["encouragement"].value;
+    direction.value = "left";
+  } else if (percent.value >= 25) {
+    status.value = "warning";
+    easterEgg.value = "./Oops.png";
+    tip.value = i18n["attention"].value;
+    direction.value = "right";
+  } else {
+    status.value = "danger";
+    easterEgg.value = "./Trash.png";
+    tip.value = i18n["trash"].value;
+    direction.value = "left";
+  }
 });
 </script>
 
@@ -43,26 +60,24 @@ watchEffect(() => {
     position="right"
     mini
   >
-    <a-progress size="mini" :status="status[0]" :percent="decimal" animation />
+    <a-progress size="mini" :status="status" :percent="decimal" animation />
   </a-tooltip>
   <a-tooltip
     v-if="reviewed[translater].reduce((a, b) => a.value + b.value) === total"
-    :content="status[2]"
+    :content="tip"
     position="top"
     mini
   >
     <img
-      :src="percent >= 100 ? './favicon.ico' : status[1]"
+      :src="easterEgg"
       :style="{
         height: '160px',
         bottom: 0,
-        [status[0] === 'success' || status[0] === 'danger'
-          ? 'left'
-          : 'right']: 0,
+        [direction]: 0,
         position: 'fixed',
       }"
       alt="Easter egg"
-      :title="status[2]"
+      :title="tip"
     />
   </a-tooltip>
 </template>
