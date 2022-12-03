@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, watchEffect } from "vue";
+import { ref, computed, watch, toRef, watchEffect } from "vue";
 import { STATUS } from "@/assets/constants";
 import {
   IconFaceSmileFill,
@@ -18,13 +18,14 @@ import shuffle from "@/utils/shuffle";
 import { ChineseRegExp } from "@/assets/constants";
 
 const props = defineProps(["type", "index"]);
-const { type, index } = props;
+const { type } = props;
+const index = toRef(props, 'index');
 
 const { store, cache } = useWords();
 const { reviewed, translationNumber, randomSingleZH, listeningMode } =
   useSettings();
 
-const word = computed(() => cache.value[type][index]);
+const word = computed(() => cache.value[type][index.value]);
 const english = ref("");
 const chinese = ref([]);
 const status = ref(word.value[1]);
@@ -70,7 +71,7 @@ const speak = useThrottleFn(() => {
 }, 500);
 
 function setStatus(s) {
-  return (status.value = cache.value[type][index][1] = s);
+  return (status.value = cache.value[type][index.value][1] = s);
 }
 
 function translate(text) {
@@ -155,7 +156,7 @@ function cheat() {
           "
           :class="[type && 'speech']"
           style="display: inline-block"
-          @click="type && speak"
+          @click="type && speak()"
         >
           {{ type ? english : randomSingleZH ? randomZH : chinese.join("；") }}
         </span>
@@ -163,7 +164,7 @@ function cheat() {
       <template v-if="status === STATUS.CORRECT || status === STATUS.LOSER">
         <span
           :class="[!type && 'speech']"
-          @click="!type && speak"
+          @click="!type && speak()"
           style="line-height: 32px; display: inline-block"
         >
           {{ type ? chinese.join("；") : english }}
@@ -222,6 +223,7 @@ function cheat() {
   height: 24px;
   padding: 0;
   font-size: 22px;
+  color: var(--color-text-1);
   background-color: transparent;
   border: 0;
   display: flex;
