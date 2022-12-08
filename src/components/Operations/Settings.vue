@@ -71,7 +71,7 @@ const handleSetting = (done) => {
   </a-tooltip>
 
   <a-modal
-    :width="360"
+    :width="400"
     v-model:visible="visible"
     :title="i18n['settings'].value"
     :ok-text="i18n['confirm'].value"
@@ -81,21 +81,21 @@ const handleSetting = (done) => {
     @cancel="visible = false"
   >
     <a-form :model="form" ref="formRef" label-align="left">
-      <a-form-item :label="i18n['store-number'].value" label-col-flex="150px">
+      <a-form-item :label="i18n['store-number'].value" label-col-flex="180px">
         {{ storeNumber }}
       </a-form-item>
       <a-form-item
         field="reviewNumber"
         :label="i18n['review-number'].value"
         :rules="reviewNumberRule"
-        label-col-flex="150px"
+        label-col-flex="180px"
       >
         <a-input-number v-model="form.reviewNumber" :min="1" :max="300" />
       </a-form-item>
       <a-form-item
         field="translationNumber"
         :label="i18n['translation-number'].value"
-        label-col-flex="150px"
+        label-col-flex="180px"
         v-show="translater"
       >
         <a-input-number v-model="form.translationNumber" :min="1" :max="300" />
@@ -103,7 +103,7 @@ const handleSetting = (done) => {
       <a-form-item
         field="randomSingleZH"
         :label="i18n['random-single-zh'].value"
-        label-col-flex="150px"
+        label-col-flex="180px"
         v-show="!translater"
       >
         <a-switch
@@ -115,7 +115,7 @@ const handleSetting = (done) => {
       <a-form-item
         field="listeningMode"
         :label="i18n['listening-mode'].value"
-        label-col-flex="150px"
+        label-col-flex="180px"
       >
         <a-switch
           :checked-value="1"
