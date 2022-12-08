@@ -43,8 +43,8 @@ export const i18nMap = {
     "Are you sure you want to restart?",
   ],
   "restart-prompt": [
-    "这将会清空你当前的进度并重新开始。",
-    "This will clear your current progress and restart.",
+    "这将会清空你当前翻译模式下的进度并重新开始。",
+    "This will clear the progress of your current translation mode and restart.",
   ],
   "accuracy": ["正确率：", "Current accuracy: "],
   "export-words": ["导出单词", "Export words"],

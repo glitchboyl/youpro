@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import { useLocalStorage } from "vueposu";
 import useTranslater from "./useTranslater";
 import useSettings from "./useSettings";
-import shuffle from './shuffle';
+import shuffle from "./shuffle";
 import { STATUS, defaultWord, defaultTranslate } from "@/assets/constants";
 
 const defaultWords = {
@@ -24,7 +24,9 @@ const reviewed = [
 
 function getShuffled(n) {
   const currentWords = cache.value[translater.value].map(([word]) => word);
-  const shuffled = shuffle(words.value.filter((word) => !currentWords.includes(word)));
+  const shuffled = shuffle(
+    words.value.filter((word) => !currentWords.includes(word))
+  );
   return shuffled.slice(0, n).map((word) => [word, STATUS.DEFAULT]);
 }
 
@@ -45,10 +47,13 @@ if (
 }
 
 export function refresh() {
-  const currentWords = cache.value[translater.value];
-  if (currentWords.length < reviewNumber.value) {
-    currentWords.push(...getShuffled(reviewNumber.value - currentWords.length));
-  }
+  cache.value.forEach((currentWords) => {
+    if (currentWords.length < reviewNumber.value) {
+      currentWords.push(
+        ...getShuffled(reviewNumber.value - currentWords.length)
+      );
+    }
+  });
 }
 
 export default function useWords() {
@@ -56,6 +61,6 @@ export default function useWords() {
     store,
     cache,
     words,
-    reviewed
+    reviewed,
   };
 }
