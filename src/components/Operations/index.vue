@@ -5,7 +5,7 @@ const Translater = defineAsyncComponent(() => import("./Translater.vue"));
 const IncreaseWord = defineAsyncComponent(() => import("./IncreaseWord.vue"));
 const EditWord = defineAsyncComponent(() => import("./EditWord.vue"));
 const Settings = defineAsyncComponent(() => import("./Settings.vue"));
-const Refresh = defineAsyncComponent(() => import("./Refresh.vue"));
+const Restart = defineAsyncComponent(() => import("./Restart.vue"));
 const ExportWords = defineAsyncComponent(() => import("./ExportWords.vue"));
 const ImportWords = defineAsyncComponent(() => import("./ImportWords.vue"));
 const Accuracy = defineAsyncComponent(() => import("./Accuracy.vue"));
@@ -18,7 +18,7 @@ const Github = defineAsyncComponent(() => import("./Github.vue"));
     <increase-word />
     <edit-word />
     <settings />
-    <refresh />
+    <restart />
     <export-words />
     <import-words />
     <accuracy />

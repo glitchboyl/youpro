@@ -1,4 +1,4 @@
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { useLocalStorage } from "vueposu";
 import useTranslater from "./useTranslater";
 import useSettings from "./useSettings";
@@ -17,6 +17,10 @@ const translater = useTranslater();
 const { reviewNumber } = useSettings();
 const now = new Date();
 const lastUpdate = useLocalStorage("last-update");
+const reviewed = [
+  [ref(0), ref(0)],
+  [ref(0), ref(0)],
+];
 
 function getShuffled(n) {
   const currentWords = cache.value[translater.value].map(([word]) => word);
@@ -52,5 +56,6 @@ export default function useWords() {
     store,
     cache,
     words,
+    reviewed
   };
 }

@@ -19,11 +19,10 @@ import { ChineseRegExp } from "@/assets/constants";
 
 const props = defineProps(["type", "index"]);
 const { type } = props;
-const index = toRef(props, 'index');
+const index = toRef(props, "index");
 
-const { store, cache } = useWords();
-const { reviewed, translationNumber, randomSingleZH, listeningMode } =
-  useSettings();
+const { store, cache, reviewed } = useWords();
+const { translationNumber, randomSingleZH, listeningMode } = useSettings();
 
 const word = computed(() => cache.value[type][index.value]);
 const english = ref("");

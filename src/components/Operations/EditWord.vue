@@ -1,15 +1,13 @@
 <script setup>
-import { reactive, ref, watchEffect } from "vue";
+import { ref, reactive, watch, watchEffect } from "vue";
 import { IconEdit, IconDelete } from "@arco-design/web-vue/es/icon";
 import { Notification } from "@arco-design/web-vue";
 import useWords, { refresh } from "@/utils/useWords";
-import useSettings from "@/utils/useSettings";
 import useTranslater from "@/utils/useTranslater";
 import useInternationalization from "@/utils/useInternationalization";
 import { ChineseRegExp, chineseRule, STATUS } from "@/assets/constants";
 
-const { store, cache, words } = useWords();
-const { reviewed } = useSettings();
+const { store, cache, words, reviewed } = useWords();
 const i18n = useInternationalization([
   "edit-word",
   "edit-notification",
@@ -32,6 +30,12 @@ watchEffect(() => {
   form.chinese = form.english ? [...store.value[form.english]] : [];
 });
 
+watch(visible, (n) => {
+  if (!n) {
+    form.english = "";
+  }
+});
+
 const handleDelete = () => {
   cache.value.forEach((list, i) => {
     const index = list.findIndex(([word]) => word === form.english);
@@ -49,10 +53,9 @@ const handleDelete = () => {
     }
   });
   delete store.value[form.english];
-  form.english = "";
-  Notification.success(i18n["delete-notification"].value);
   refresh();
   visible.value = false;
+  Notification.success(i18n["delete-notification"].value);
 };
 const handleSplit = (input, e) => {
   if (input && ChineseRegExp.test(input)) {

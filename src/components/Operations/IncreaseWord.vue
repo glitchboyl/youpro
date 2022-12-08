@@ -61,9 +61,11 @@ const handleIncrease = (done) => {
     if (!errors) {
       const { english, chinese } = form;
       store.value[english] = chinese;
-      if (cache.value[translater.value].length < reviewNumber.value) {
-        cache.value[translater.value].push([english, STATUS.DEFAULT]);
-      }
+      cache.value.forEach((c) => {
+        if (c.length < reviewNumber.value) {
+          c.push([english, STATUS.DEFAULT]);
+        }
+      });
       Notification.success(i18n["increase-notification"].value);
     }
     done(!errors);

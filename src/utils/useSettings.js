@@ -12,10 +12,6 @@ const reviewNumber = computed(computeSetting(0));
 const translationNumber = computed(computeSetting(1));
 const randomSingleZH = computed(computeSetting(2));
 const listeningMode = computed(computeSetting(3));
-const reviewed = [
-  [ref(0), ref(0)],
-  [ref(0), ref(0)],
-];
 
 export default function useSettings() {
   return {
@@ -24,6 +20,5 @@ export default function useSettings() {
     translationNumber,
     randomSingleZH,
     listeningMode,
-    reviewed,
   };
 }

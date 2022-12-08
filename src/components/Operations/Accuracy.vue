@@ -5,9 +5,9 @@ import useTranslater from "@/utils/useTranslater";
 import useSettings from "@/utils/useSettings";
 import useInternationalization from "@/utils/useInternationalization";
 
-const { cache, words } = useWords();
+const { cache, words, reviewed } = useWords();
 const translater = useTranslater();
-const { reviewNumber, reviewed } = useSettings();
+const { reviewNumber } = useSettings();
 const i18n = useInternationalization([
   "accuracy",
   "congratulation",

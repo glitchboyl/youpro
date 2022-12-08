@@ -37,7 +37,15 @@ export const i18nMap = {
     "复习数量不能小于 1。",
     "Review number can't less than 1.",
   ],
-  refresh: ["刷新", "Refresh"],
+  restart: ["重新开始", "Restart"],
+  "restart-title": [
+    "确定重新开始吗？",
+    "Are you sure you want to restart?",
+  ],
+  "restart-prompt": [
+    "这将会清空你当前的进度并重新开始。",
+    "This will clear your current progress and restart.",
+  ],
   "accuracy": ["正确率：", "Current accuracy: "],
   "export-words": ["导出单词", "Export words"],
   "import-words": ["导入单词", "Import words"],
