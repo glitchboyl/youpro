@@ -71,7 +71,10 @@ const handleIncrease = (done) => {
     done(!errors);
   });
 };
-const handleClose = () => formRef.value.resetFields();
+const handleClose = () => {
+  formRef.value.resetFields();
+  formRef.value.clearValidate();
+};
 </script>
 
 <template>

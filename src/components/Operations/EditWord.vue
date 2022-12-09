@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, watch, watchEffect } from "vue";
+import { ref, reactive, watchEffect } from "vue";
 import { IconEdit, IconDelete } from "@arco-design/web-vue/es/icon";
 import { Notification } from "@arco-design/web-vue";
 import useWords, { refresh } from "@/utils/useWords";
@@ -30,12 +30,6 @@ watchEffect(() => {
   form.chinese = form.english ? [...store.value[form.english]] : [];
 });
 
-watch(visible, (n) => {
-  if (!n) {
-    form.english = "";
-  }
-});
-
 const handleDelete = () => {
   cache.value.forEach((list, i) => {
     const index = list.findIndex(([word]) => word === form.english);
@@ -53,8 +47,7 @@ const handleDelete = () => {
     }
   });
   delete store.value[form.english];
-  refresh();
-  visible.value = false;
+  handleClose();
   Notification.success(i18n["delete-notification"].value);
 };
 const handleSplit = (input, e) => {
@@ -75,7 +68,10 @@ const handleEdit = (done) => {
     done(!errors);
   });
 };
-const handleClose = () => formRef.value.resetFields();
+const handleClose = () => {
+  formRef.value.resetFields();
+  formRef.value.clearValidate();
+};
 </script>
 
 <template>

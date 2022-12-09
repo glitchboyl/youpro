@@ -3,7 +3,6 @@ import { IconRefresh } from "@arco-design/web-vue/es/icon";
 import { Modal } from "@arco-design/web-vue";
 import useWords, { refresh } from "@/utils/useWords";
 import useTranslater from "@/utils/useTranslater";
-import useSettings from "@/utils/useSettings";
 import useInternationalization from "@/utils/useInternationalization";
 
 const { cache, reviewed } = useWords();

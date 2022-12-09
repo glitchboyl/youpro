@@ -23,6 +23,12 @@ const status = ref("danger");
 const easterEgg = ref("./Trash.png");
 const tip = ref(i18n["trash"].value);
 const direction = ref("right");
+const showEasterEgg = computed(
+  () =>
+    total.value > 0 &&
+    reviewed[translater.value].reduce((a, b) => a.value + b.value) ===
+      total.value
+);
 
 watchEffect(() => {
   decimal.value = total.value
@@ -62,12 +68,7 @@ watchEffect(() => {
   >
     <a-progress size="mini" :status="status" :percent="decimal" animation />
   </a-tooltip>
-  <a-tooltip
-    v-if="reviewed[translater].reduce((a, b) => a.value + b.value) === total"
-    :content="tip"
-    position="top"
-    mini
-  >
+  <a-tooltip v-if="showEasterEgg" :content="tip" position="top" mini>
     <img
       :src="easterEgg"
       :style="{
