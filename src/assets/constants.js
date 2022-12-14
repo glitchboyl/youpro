@@ -70,4 +70,5 @@ export const i18nMap = {
     "没有单词，请添加单词或刷新。",
     "No words, please increase word or refresh.",
   ],
+  "test": ["夜间模式（演示用）", "Dark Mode(For view)"]
 };

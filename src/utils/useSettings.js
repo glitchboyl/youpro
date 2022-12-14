@@ -1,5 +1,6 @@
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useLocalStorage } from "vueposu";
+import { darkThemeMq } from "@/utils/darkMode";
 
 const settings = useLocalStorage("settings", [10, 1, 0, 0]);
 

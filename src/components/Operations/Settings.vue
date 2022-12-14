@@ -8,6 +8,9 @@ import useSettings from "@/utils/useSettings";
 import useTranslater from "@/utils/useTranslater";
 import useInternationalization from "@/utils/useInternationalization";
 
+// test
+import { darkThemeMq, darkModeListener } from "@/utils/darkMode";
+
 const visible = ref(false);
 const translater = useTranslater();
 const i18n = useInternationalization([
@@ -21,6 +24,7 @@ const i18n = useInternationalization([
   "setting-notification",
   "confirm",
   "cancel",
+  "test",
 ]);
 
 const { store } = useWords();
@@ -32,6 +36,7 @@ const form = reactive({
   translationNumber: translationNumber.value,
   randomSingleZH: randomSingleZH.value,
   listeningMode: listeningMode.value,
+  test: +darkThemeMq.matches,
 });
 const formRef = ref();
 
@@ -53,6 +58,7 @@ const handleSetting = (done) => {
       translationNumber.value = form.translationNumber;
       randomSingleZH.value = form.randomSingleZH;
       listeningMode.value = form.listeningMode;
+      darkModeListener({ matches: form.test });
       refresh();
       Notification.success(i18n["setting-notification"].value);
     }
@@ -123,6 +129,13 @@ const handleSetting = (done) => {
           v-model="form.listeningMode"
         />
         <!-- <template #extra> will be hard! </template> -->
+      </a-form-item>
+      <a-form-item
+        field="test"
+        :label="i18n['test'].value"
+        label-col-flex="180px"
+      >
+        <a-switch :checked-value="1" :unchecked-value="0" v-model="form.test" />
       </a-form-item>
     </a-form>
   </a-modal>
