@@ -38,15 +38,12 @@ export const i18nMap = {
     "Review number can't less than 1.",
   ],
   restart: ["重新开始", "Restart"],
-  "restart-title": [
-    "确定重新开始吗？",
-    "Are you sure you want to restart?",
-  ],
+  "restart-title": ["确定重新开始吗？", "Are you sure you want to restart?"],
   "restart-prompt": [
     "这将会清空你当前翻译模式下的进度并重新开始。",
     "This will clear the progress of your current translation mode and restart.",
   ],
-  "accuracy": ["正确率：", "Current accuracy: "],
+  accuracy: ["正确率：", "Current accuracy: "],
   "export-words": ["导出单词", "Export words"],
   "import-words": ["导入单词", "Import words"],
   confirm: ["确定", "Confirm"],
@@ -70,5 +67,4 @@ export const i18nMap = {
     "没有单词，请添加单词或刷新。",
     "No words, please increase word or refresh.",
   ],
-  "test": ["夜间模式（演示用）", "Dark Mode(For view)"]
 };
