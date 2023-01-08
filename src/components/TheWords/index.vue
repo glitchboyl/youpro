@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { defineAsyncComponent } from "vue";
 import useTranlater from "@/utils/useTranslater";
 const WordsList = defineAsyncComponent(() => import("./WordsList.vue"));

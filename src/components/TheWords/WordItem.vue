@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch, toRef, watchEffect } from "vue";
 import { STATUS } from "@/assets/constants";
 import {

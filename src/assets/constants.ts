@@ -1,11 +1,11 @@
 // word recite status
-export const STATUS = {
-  DEFAULT: 0,
-  CORRECT: 1,
-  INCORRECT: 2,
-  LOSER: 3,
-  CLOSER: 4,
-};
+export enum STATUS {
+  DEFAULT = 0,
+  CORRECT = 1,
+  INCORRECT = 2,
+  LOSER = 3,
+  CLOSER = 4,
+}
 
 export const defaultWord = "abandon";
 export const defaultTranslate = ["放弃", "遗弃", "抛弃", "舍弃", "丢弃"];

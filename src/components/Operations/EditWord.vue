@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, reactive, watchEffect } from "vue";
 import { IconEdit, IconDelete } from "@arco-design/web-vue/es/icon";
 import { Notification } from "@arco-design/web-vue";

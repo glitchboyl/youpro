@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { IconUpload } from "@arco-design/web-vue/es/icon";
 import useWords, { refresh } from "@/utils/useWords";
 import useInternationalization from "@/utils/useInternationalization";

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { defineAsyncComponent } from "vue";
 import WordsSkeleton from "./components/Skeleton/WordsSkeleton.vue";
 import OperationSkeleton from "./components/Skeleton/OperationSkeleton.vue";

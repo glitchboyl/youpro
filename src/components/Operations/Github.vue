@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { IconGithub } from "@arco-design/web-vue/es/icon";
 import useInternationalization from "@/utils/useInternationalization";
 

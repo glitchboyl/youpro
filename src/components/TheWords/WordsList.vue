@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, toRef, watch, defineAsyncComponent } from "vue";
 import useWords from "@/utils/useWords";
 import useSettings from "@/utils/useSettings";

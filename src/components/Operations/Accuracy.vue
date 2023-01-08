@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watchEffect } from "vue";
 import useWords from "@/utils/useWords";
 import useTranslater from "@/utils/useTranslater";

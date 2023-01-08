@@ -1,4 +1,4 @@
-export default function shuffle(array) {
+export default function shuffle(array: string[]) {
 	const shuffled = [...array];
   const lastIndex = shuffled.length - 1;
   let temp;

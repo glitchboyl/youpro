@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { IconRefresh } from "@arco-design/web-vue/es/icon";
 import { Modal } from "@arco-design/web-vue";
 import useWords, { refresh } from "@/utils/useWords";

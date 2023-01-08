@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { watch } from "vue";
 import useTranslater from "@/utils/useTranslater";
 const translater = useTranslater();

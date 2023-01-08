@@ -1,12 +1,11 @@
 import { computed } from "vue";
 import { useLocalStorage } from "vueposu";
-import { darkThemeMq } from "@/utils/darkMode";
 
 const settings = useLocalStorage("settings", [10, 1, 0, 0]);
 
-const computeSetting = (i) => ({
-  get: () => settings.value[i],
-  set: (v) => (settings.value[i] = v),
+const computeSetting = (i: number) => ({
+  get: () => settings?.value![i],
+  set: (v: number) => (settings.value![i] = v),
 });
 
 const reviewNumber = computed(computeSetting(0));
